@@ -16,11 +16,11 @@ function Change-NugetRefs {
 
 
 ## Extenal PS1 Scripts
-iex ([String]::Join([Environment]::NewLine, (gc (Join-Path $PSScriptRoot Foreach-Parallel._ps1))))
-iex ([String]::Join([Environment]::NewLine, (gc (Join-Path $PSScriptRoot Set-VS2012._ps1))))
-iex ([String]::Join([Environment]::NewLine, (gc (Join-Path $PSScriptRoot Set-VS2013._ps1))))
-iex ([String]::Join([Environment]::NewLine, (gc (Join-Path $PSScriptRoot prompt._ps1))))
-iex ([String]::Join([Environment]::NewLine, (gc (Join-Path $PSScriptRoot Get-FindLocation._ps1))))
+. (Join-Path $PSScriptRoot Foreach-Parallel.ps1)
+. (Join-Path $PSScriptRoot Set-VS2012.ps1)
+. (Join-Path $PSScriptRoot Set-VS2013.ps1)
+. (Join-Path $PSScriptRoot prompt.ps1)
+. (Join-Path $PSScriptRoot Get-FindLocation.ps1)
 
 # Aliases
 Set-Alias vs2012 Set-VS2012
@@ -31,7 +31,7 @@ Set-Alias nuget (Join-Path $PSScriptRoot 'NuGet.exe')
 # GNU Win32 Aliases
 Set-Alias sed (Join-Path $PSScriptRoot 'GnuWin32\sed.exe')
 Set-Alias gzip (Join-Path $PSScriptRoot 'GnuWin32\gzip.exe')
-Set-Alias wget (Join-Path $PSScriptRoot 'GnuWin32\wget.exe')
+Set-Alias gwget (Join-Path $PSScriptRoot 'GnuWin32\wget.exe')
 Set-Alias zip (Join-Path $PSScriptRoot 'GnuWin32\zip.exe')
 Set-Alias unzip (Join-Path $PSScriptRoot 'GnuWin32\unzip.exe')
 
@@ -52,7 +52,7 @@ Export-ModuleMember -alias nuget
 #Export GNU Win32 Aliases
 Export-ModuleMember -alias sed
 Export-ModuleMember -alias gzip
-Export-ModuleMember -alias wget
+Export-ModuleMember -alias gwget
 Export-ModuleMember -alias zip
 Export-ModuleMember -alias unzip
 
