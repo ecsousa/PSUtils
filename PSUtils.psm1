@@ -26,6 +26,7 @@ iex ([String]::Join([Environment]::NewLine, (gc (Join-Path $PSScriptRoot Get-Fin
 Set-Alias vs2012 Set-VS2012
 Set-Alias vs2013 Set-VS2013
 Set-Alias which Get-FindLocation
+Set-Alias nuget (Join-Path $PSScriptRoot 'NuGet.exe')
 
 # GNU Win32 Aliases
 Set-Alias sed (Join-Path $PSScriptRoot 'GnuWin32\sed.exe')
@@ -46,6 +47,7 @@ Export-ModuleMember -function Get-FindLocation
 Export-ModuleMember -alias vs2012
 Export-ModuleMember -alias vs2013
 Export-ModuleMember -alias which
+Export-ModuleMember -alias nuget
 
 #Export GNU Win32 Aliases
 Export-ModuleMember -alias sed
