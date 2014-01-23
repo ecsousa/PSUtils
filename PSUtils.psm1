@@ -21,12 +21,14 @@ function Change-NugetRefs {
 . (Join-Path $PSScriptRoot Set-VS2013.ps1)
 . (Join-Path $PSScriptRoot prompt.ps1)
 . (Join-Path $PSScriptRoot Get-FindLocation.ps1)
+. (Join-Path $PSScriptRoot Execute-TFS.ps1)
 
 # Aliases
 Set-Alias vs2012 Set-VS2012
 Set-Alias vs2013 Set-VS2013
 Set-Alias which Get-FindLocation
 Set-Alias nuget (Join-Path $PSScriptRoot 'NuGet.exe')
+Set-Alias tf Execute-TFS
 
 # GNU Win32 Aliases
 Set-Alias sed (Join-Path $PSScriptRoot 'GnuWin32\sed.exe')
@@ -42,12 +44,14 @@ Export-ModuleMember -function Set-VS2012
 Export-ModuleMember -function Set-VS2013
 Export-ModuleMember -function prompt
 Export-ModuleMember -function Get-FindLocation
+Export-ModuleMember -function Execute-TFS
 
 #Export aliases
 Export-ModuleMember -alias vs2012
 Export-ModuleMember -alias vs2013
 Export-ModuleMember -alias which
 Export-ModuleMember -alias nuget
+Export-ModuleMember -alias tf
 
 #Export GNU Win32 Aliases
 Export-ModuleMember -alias sed
