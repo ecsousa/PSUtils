@@ -3,7 +3,9 @@
 #Do mappings
 
 $mappings = & (join-path $PSScriptRoot Generate-PSDrives.ps1)
-iex ([string]::Join([Environment]::NewLine, $mappings))
+if($mappings) {
+    iex ([string]::Join([Environment]::NewLine, $mappings))
+}
 
 
 #FSI Path
