@@ -22,6 +22,7 @@ function Change-NugetRefs {
 . (Join-Path $PSScriptRoot prompt.ps1)
 . (Join-Path $PSScriptRoot Get-FindLocation.ps1)
 . (Join-Path $PSScriptRoot Execute-TFS.ps1)
+. (Join-Path $PSScriptRoot Get-Manual.ps1)
 
 # Aliases
 Set-Alias vs2012 Set-VS2012
@@ -29,6 +30,7 @@ Set-Alias vs2013 Set-VS2013
 Set-Alias which Get-FindLocation
 Set-Alias nuget (Join-Path $PSScriptRoot 'NuGet.exe')
 Set-Alias tf Execute-TFS
+Set-Alias gman Get-Manual
 
 # GNU Win32 Aliases
 Set-Alias sed (Join-Path $PSScriptRoot 'GnuWin32\bin\sed.exe')
@@ -39,6 +41,7 @@ Set-Alias unzip (Join-Path $PSScriptRoot 'GnuWin32\bin\unzip.exe')
 Set-Alias tar (Join-Path $PSScriptRoot 'GnuWin32\bin\tar.exe')
 Set-Alias awk (Join-Path $PSScriptRoot 'GnuWin32\bin\awk.exe')
 Set-Alias gawk (Join-Path $PSScriptRoot 'GnuWin32\bin\gawk.exe')
+Set-Alias less (Join-Path $PSScriptRoot 'GnuWin32\bin\less.exe')
 
 # Export scripts
 Export-ModuleMember -function Foreach-Parallel
@@ -48,6 +51,7 @@ Export-ModuleMember -function Set-VS2013
 Export-ModuleMember -function prompt
 Export-ModuleMember -function Get-FindLocation
 Export-ModuleMember -function Execute-TFS
+Export-ModuleMember -function Get-Manual
 
 #Export aliases
 Export-ModuleMember -alias vs2012
@@ -55,6 +59,7 @@ Export-ModuleMember -alias vs2013
 Export-ModuleMember -alias which
 Export-ModuleMember -alias nuget
 Export-ModuleMember -alias tf
+Export-ModuleMember -alias gman
 
 #Export GNU Win32 Aliases
 Export-ModuleMember -alias sed
@@ -65,4 +70,5 @@ Export-ModuleMember -alias unzip
 Export-ModuleMember -alias tar
 Export-ModuleMember -alias awk
 Export-ModuleMember -alias gawk
+Export-ModuleMember -alias less
 
