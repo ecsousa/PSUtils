@@ -31,11 +31,14 @@ Set-Alias nuget (Join-Path $PSScriptRoot 'NuGet.exe')
 Set-Alias tf Execute-TFS
 
 # GNU Win32 Aliases
-Set-Alias sed (Join-Path $PSScriptRoot 'GnuWin32\sed.exe')
-Set-Alias gzip (Join-Path $PSScriptRoot 'GnuWin32\gzip.exe')
-Set-Alias gwget (Join-Path $PSScriptRoot 'GnuWin32\wget.exe')
-Set-Alias zip (Join-Path $PSScriptRoot 'GnuWin32\zip.exe')
-Set-Alias unzip (Join-Path $PSScriptRoot 'GnuWin32\unzip.exe')
+Set-Alias sed (Join-Path $PSScriptRoot 'GnuWin32\bin\sed.exe')
+Set-Alias gzip (Join-Path $PSScriptRoot 'GnuWin32\bin\gzip.exe')
+Set-Alias gwget (Join-Path $PSScriptRoot 'GnuWin32\bin\wget.exe')
+Set-Alias zip (Join-Path $PSScriptRoot 'GnuWin32\bin\zip.exe')
+Set-Alias unzip (Join-Path $PSScriptRoot 'GnuWin32\bin\unzip.exe')
+Set-Alias tar (Join-Path $PSScriptRoot 'GnuWin32\bin\tar.exe')
+Set-Alias awk (Join-Path $PSScriptRoot 'GnuWin32\bin\awk.exe')
+Set-Alias gawk (Join-Path $PSScriptRoot 'GnuWin32\bin\gawk.exe')
 
 # Export scripts
 Export-ModuleMember -function Foreach-Parallel
@@ -59,4 +62,7 @@ Export-ModuleMember -alias gzip
 Export-ModuleMember -alias gwget
 Export-ModuleMember -alias zip
 Export-ModuleMember -alias unzip
+Export-ModuleMember -alias tar
+Export-ModuleMember -alias awk
+Export-ModuleMember -alias gawk
 
