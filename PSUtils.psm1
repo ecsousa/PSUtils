@@ -9,21 +9,33 @@ if($mappings) {
 
 
 #FSI Path
-$paths = (
+$paths = ([string[]] ((
     'C:\Program Files (x86)\Microsoft SDKs\F#\3.1\Framework\v4.0\Fsi.exe',
     'C:\Program Files\Microsoft SDKs\F#\3.1\Framework\v4.0\Fsi.exe',
     'C:\Program Files (x86)\Microsoft SDKs\F#\3.0\Framework\v4.0\Fsi.exe',
     'C:\Program Files\Microsoft SDKs\F#\3.0\Framework\v4.0\Fsi.exe'
-    )
+    ) | ? { Test-Path $_ }))
 
-$fsiPath = ($paths | ? { Test-Path $_ })[0]
+if($paths) {
+    $fsiPath = $paths[0];
 
-## F# Scripts
-function Change-NugetRefs {
-    $fsiArgs = & { Join-Path $PSScriptRoot Change-NugetRefs.fsx; $args };
-    & ( $fsiPath ) $fsiArgs
+    function Execute-FSI {
+        & ( $fsiPath ) $args
+    }
+
+    # F# Scripts
+    function Change-NugetRefs {
+        $fsiArgs = & { Join-Path $PSScriptRoot Change-NugetRefs.fsx; $args };
+        & ( $fsiPath ) $fsiArgs
+    }
+
+    Set-Alias fsi Execute-FSI
+
+    Export-ModuleMember -function Execute-FSI
+    Export-ModuleMember -function Change-NugetRefs
+    Export-ModuleMember -alias fsi
+
 }
-
 
 ## Extenal PS1 Scripts
 . (Join-Path $PSScriptRoot Foreach-Parallel.ps1)
@@ -55,7 +67,6 @@ Set-Alias less (Join-Path $PSScriptRoot 'GnuWin32\bin\less.exe')
 
 # Export scripts
 Export-ModuleMember -function Foreach-Parallel
-Export-ModuleMember -function Change-NugetRefs
 Export-ModuleMember -function Set-VS2012
 Export-ModuleMember -function Set-VS2013
 Export-ModuleMember -function prompt
