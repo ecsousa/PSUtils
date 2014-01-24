@@ -39,6 +39,8 @@ if($paths) {
 . (Join-Path $PSScriptRoot prompt.ps1)
 . (Join-Path $PSScriptRoot Get-FindLocation.ps1)
 . (Join-Path $PSScriptRoot Execute-TFS.ps1)
+. (Join-Path $PSScriptRoot Execute-gVim.ps1)
+. (Join-Path $PSScriptRoot Execute-Vim.ps1)
 . (Join-Path $PSScriptRoot Get-Manual.ps1)
 . (Join-Path $PSScriptRoot Create-Link.ps1)
 
@@ -48,6 +50,8 @@ Set-Alias vs2013 Set-VS2013
 Set-Alias which Get-FindLocation
 Set-Alias nuget (Join-Path $PSScriptRoot 'NuGet.exe')
 Set-Alias tf Execute-TFS
+Set-Alias gvim Execute-gVim
+Set-Alias vim Execute-Vim
 Set-Alias gman Get-Manual
 Set-Alias mklink Create-Link
 
@@ -69,6 +73,8 @@ Export-ModuleMember -function Set-VS2013
 Export-ModuleMember -function prompt
 Export-ModuleMember -function Get-FindLocation
 Export-ModuleMember -function Execute-TFS
+Export-ModuleMember -function Execute-gVim
+Export-ModuleMember -function Execute-Vim
 Export-ModuleMember -function Get-Manual
 Export-ModuleMember -function Create-Link
 
@@ -78,6 +84,8 @@ Export-ModuleMember -alias vs2013
 Export-ModuleMember -alias which
 Export-ModuleMember -alias nuget
 Export-ModuleMember -alias tf
+Export-ModuleMember -alias gvim
+Export-ModuleMember -alias vim
 Export-ModuleMember -alias gman
 Export-ModuleMember -alias mklink
 
