@@ -19,19 +19,14 @@ $paths = ([string[]] ((
 if($paths) {
     $fsiPath = $paths[0];
 
-    function Execute-FSI {
-        & ( $fsiPath ) $args
-    }
-
     # F# Scripts
     function Change-NugetRefs {
         $fsiArgs = & { Join-Path $PSScriptRoot Change-NugetRefs.fsx; $args };
         & ( $fsiPath ) $fsiArgs
     }
 
-    Set-Alias fsi Execute-FSI
+    Set-Alias fsi $fsiPath
 
-    Export-ModuleMember -function Execute-FSI
     Export-ModuleMember -function Change-NugetRefs
     Export-ModuleMember -alias fsi
 
