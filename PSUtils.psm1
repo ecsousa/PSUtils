@@ -40,6 +40,7 @@ if($paths) {
 . (Join-Path $PSScriptRoot Get-FindLocation.ps1)
 . (Join-Path $PSScriptRoot Execute-TFS.ps1)
 . (Join-Path $PSScriptRoot Get-Manual.ps1)
+. (Join-Path $PSScriptRoot Create-Link.ps1)
 
 # Aliases
 Set-Alias vs2012 Set-VS2012
@@ -48,6 +49,7 @@ Set-Alias which Get-FindLocation
 Set-Alias nuget (Join-Path $PSScriptRoot 'NuGet.exe')
 Set-Alias tf Execute-TFS
 Set-Alias gman Get-Manual
+Set-Alias mklink Create-Link
 
 # GNU Win32 Aliases
 Set-Alias sed (Join-Path $PSScriptRoot 'GnuWin32\bin\sed.exe')
@@ -68,6 +70,7 @@ Export-ModuleMember -function prompt
 Export-ModuleMember -function Get-FindLocation
 Export-ModuleMember -function Execute-TFS
 Export-ModuleMember -function Get-Manual
+Export-ModuleMember -function Create-Link
 
 #Export aliases
 Export-ModuleMember -alias vs2012
@@ -76,6 +79,7 @@ Export-ModuleMember -alias which
 Export-ModuleMember -alias nuget
 Export-ModuleMember -alias tf
 Export-ModuleMember -alias gman
+Export-ModuleMember -alias mklink
 
 #Export GNU Win32 Aliases
 Export-ModuleMember -alias sed
