@@ -20,40 +20,42 @@ if($paths) {
     $fsiPath = $paths[0];
 
     # F# Scripts
-    function Change-NugetRefs {
-        $fsiArgs = & { Join-Path $PSScriptRoot Change-NugetRefs.fsx; $args };
+    function Set-NugetRefs {
+        $fsiArgs = & { Join-Path $PSScriptRoot Set-NugetRefs.fsx; $args };
         & ( $fsiPath ) $fsiArgs
     }
 
     Set-Alias fsi $fsiPath
 
-    Export-ModuleMember -function Change-NugetRefs
+    Export-ModuleMember -function Set-NugetRefs
     Export-ModuleMember -alias fsi
 
 }
 
 ## Extenal PS1 Scripts
-. (Join-Path $PSScriptRoot Foreach-Parallel.ps1)
+. (Join-Path $PSScriptRoot Invoke-ForeachParallel.ps1)
 . (Join-Path $PSScriptRoot Set-VS2012.ps1)
 . (Join-Path $PSScriptRoot Set-VS2013.ps1)
-. (Join-Path $PSScriptRoot prompt.ps1)
+. (Join-Path $PSScriptRoot Write-Prompt.ps1)
 . (Join-Path $PSScriptRoot Get-FindLocation.ps1)
-. (Join-Path $PSScriptRoot Execute-TFS.ps1)
-. (Join-Path $PSScriptRoot Execute-gVim.ps1)
-. (Join-Path $PSScriptRoot Execute-Vim.ps1)
+. (Join-Path $PSScriptRoot Invoke-TFS.ps1)
+. (Join-Path $PSScriptRoot Start-gVim.ps1)
+. (Join-Path $PSScriptRoot Start-Vim.ps1)
 . (Join-Path $PSScriptRoot Get-Manual.ps1)
-. (Join-Path $PSScriptRoot Create-Link.ps1)
+. (Join-Path $PSScriptRoot Add-Link.ps1)
 
 # Aliases
+Set-Alias %p Invoke-ForeachParallel
 Set-Alias vs2012 Set-VS2012
 Set-Alias vs2013 Set-VS2013
 Set-Alias which Get-FindLocation
 Set-Alias nuget (Join-Path $PSScriptRoot 'NuGet.exe')
-Set-Alias tf Execute-TFS
-Set-Alias gvim Execute-gVim
-Set-Alias vim Execute-Vim
+Set-Alias tf Invoke-TFS
+Set-Alias gvim Start-gVim
+Set-Alias vim Start-Vim
 Set-Alias gman Get-Manual
-Set-Alias mklink Create-Link
+Set-Alias mklink Add-Link
+Set-Alias prompt Write-Prompt
 
 # GNU Win32 Aliases
 Set-Alias sed (Join-Path $PSScriptRoot 'GnuWin32\bin\sed.exe')
@@ -67,18 +69,19 @@ Set-Alias gawk (Join-Path $PSScriptRoot 'GnuWin32\bin\gawk.exe')
 Set-Alias less (Join-Path $PSScriptRoot 'GnuWin32\bin\less.exe')
 
 # Export scripts
-Export-ModuleMember -function Foreach-Parallel
+Export-ModuleMember -function Invoke-ForeachParallel
 Export-ModuleMember -function Set-VS2012
 Export-ModuleMember -function Set-VS2013
-Export-ModuleMember -function prompt
+Export-ModuleMember -function Write-Prompt
 Export-ModuleMember -function Get-FindLocation
-Export-ModuleMember -function Execute-TFS
-Export-ModuleMember -function Execute-gVim
-Export-ModuleMember -function Execute-Vim
+Export-ModuleMember -function Invoke-TFS
+Export-ModuleMember -function Start-gVim
+Export-ModuleMember -function Start-Vim
 Export-ModuleMember -function Get-Manual
-Export-ModuleMember -function Create-Link
+Export-ModuleMember -function Add-Link
 
 #Export aliases
+Export-ModuleMember -alias %p
 Export-ModuleMember -alias vs2012
 Export-ModuleMember -alias vs2013
 Export-ModuleMember -alias which
@@ -88,6 +91,7 @@ Export-ModuleMember -alias gvim
 Export-ModuleMember -alias vim
 Export-ModuleMember -alias gman
 Export-ModuleMember -alias mklink
+Export-ModuleMember -alias prompt
 
 #Export GNU Win32 Aliases
 Export-ModuleMember -alias sed

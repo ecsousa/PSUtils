@@ -1,5 +1,5 @@
 
-function Execute-TFS {
+function Invoke-TFS {
     $tfPaths = [string[]] ((
         $env:VS120COMNTOOLS,
         $env:VS110COMNTOOLS,

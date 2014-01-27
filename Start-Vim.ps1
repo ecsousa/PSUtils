@@ -1,5 +1,5 @@
 
-function Execute-Vim {
+function Start-Vim {
     $path = ([regex] ('(?i)\\' + ([regex]::Escape((gi $PSScriptRoot).Name)) + '\\?$')).Replace((cvpa $PSScriptRoot), '\Vim\Vim.exe')
     $vimfiles = Join-Path $PSScriptRoot vimfiles
 

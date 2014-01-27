@@ -8,6 +8,7 @@ if(Test-Path $file) {
         $prefix = $m.Groups[1].Value;
         $path = $m.Groups[2].Value;
 
+        "get-psdrive $prefix -ErrorAction SilentlyContinue | Remove-PsDrive"
         "New-PSDrive -PSProvider FileSystem -Scope Global -Name $prefix -Root '$path' | out-null"
         "function Set-Location_$prefix { cd ${prefix}: }"
         "Set-Alias '${prefix}:' 'Set-Location_$prefix'"

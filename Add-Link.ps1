@@ -1,3 +1,3 @@
-function Create-Link {
+function Add-Link {
     & ('cmd.exe') (('/c', 'mklink') + $args)
 }

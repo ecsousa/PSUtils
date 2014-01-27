@@ -1,6 +1,6 @@
 $Global:TitlePrefix = '[psh] ';
 
-function prompt {
+function Write-Prompt {
     if((gi .).PSProvider.Name -eq 'FileSystem') {
         [system.Environment]::CurrentDirectory = (convert-path ".");
     }

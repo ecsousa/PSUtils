@@ -1,4 +1,4 @@
-﻿function ForEach-Parallel {
+﻿function Invoke-ForeachParallel {
 <#
 .SYNOPSIS
 A parallel ForEach that uses runspaces
