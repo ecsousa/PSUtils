@@ -32,6 +32,12 @@ if($paths) {
 
 }
 
+## Cusom Actions
+if(Test-Path (Join-Path $env:USERPROFILE PSUtils-Custom.ps1))
+{
+    . (Join-Path $env:USERPROFILE PSUtils-Custom.ps1)
+}
+
 ## Extenal PS1 Scripts
 . (Join-Path $PSScriptRoot Invoke-ForeachParallel.ps1)
 . (Join-Path $PSScriptRoot Set-VS2012.ps1)
