@@ -1,14 +1,12 @@
 
-#r "Microsoft.TeamFoundation.Client"
-#r "Microsoft.TeamFoundation.VersionControl.Common"
-#r "Microsoft.TeamFoundation.VersionControl.Client"
+#load "TFS.fsx"
+#load "XMLUtils.fsx"
 
 open System
 open System.IO
 open System.Text.RegularExpressions
-open Microsoft.TeamFoundation.Client
 open Microsoft.TeamFoundation.VersionControl.Client
-
+open XMLUtils
 
 // Define a tupla com os prefixos a serem alterados, e suas respectivas versões
 // Baseado em um arquivo texto, contendo prefixo do pacote, e versão
@@ -36,25 +34,6 @@ let prefixes =
     }
     |> Seq.toList
 
-// Método para processar arquivos xml
-let processarXml (namespaces: (string*string) list) (arquivo: string) processamento =
-    let xml = Xml.XmlDocument()
-    xml.Load(arquivo)
-
-    let xnm = Xml.XmlNamespaceManager(xml.NameTable)
-    for ns in namespaces do
-        xnm.AddNamespace((fst ns), (snd ns))
-
-    let selectNodes xpath =
-        seq {
-            for node in xml.SelectNodes(xpath, xnm) do
-                yield node, xnm
-        }
-
-    processamento selectNodes
-
-    xml.Save(arquivo)
-
 // Obter lista de arquivo packages.config do diretório
 let packages =
     Directory.EnumerateFiles(".", "packages.config", SearchOption.AllDirectories)
@@ -65,28 +44,25 @@ let csprojs =
     Directory.EnumerateFiles(".", "*.csproj", SearchOption.AllDirectories)
     |> Seq.map id
 
-//Obter workspace do diretório atual
-let wi = Workstation.Current.GetLocalWorkspaceInfo(".")
 
-if wi <> null then
-    //Montar objetos de conexão com o TFS
-    use tpc = new TfsTeamProjectCollection(wi.ServerUri);
-    let vcs = tpc.GetService<VersionControlServer>();
-    let wsp = vcs.GetWorkspace(wi);
+try
+    use tfs = new TFS.TFSConnection()
 
     // Método para realizar checkout nos arquivos que serão alterados
     let filesToCheckout =
         packages
         |> Seq.append csprojs
         |> Seq.where (fun item ->
-            vcs.ServerItemExists(item, ItemType.Any))
+            tfs.VersionControlServer.ServerItemExists(item, ItemType.Any))
         |> Seq.toArray
 
     if filesToCheckout.Length > 0 then
-        if wsp.PendEdit filesToCheckout < filesToCheckout.Length then
+        if tfs.Workspace.PendEdit filesToCheckout < filesToCheckout.Length then
             failwith (sprintf "Nao foi possivel realizaer checkout de um ou mais arquivos")
         else
             printfn "Checkouts efetuados com sucesso!"
+with
+    | TFS.WorkspaceNotFound _ -> ()
 
 
 // Percorrer arquivos packages.conofig
