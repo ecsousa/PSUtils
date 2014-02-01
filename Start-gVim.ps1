@@ -9,13 +9,13 @@ function Start-gVim {
     }
 
     if(-not (Test-Path $path)) {
-        Write-Warning "Could not find gVim in $path"
+        Write-Warning "Could not find gVim in '$path'"
         return;
     }
 
     $vimfiles = Join-Path $PSScriptRoot vimfiles
 
-    Write-Verbose "Start gVim from $path"
+    Write-Verbose "Start gVim from '$path'"
 
     $newArgs = & { '-u'; (cvpa (Join-Path $PSScriptRoot _vimrc)); '--cmd'; "set rtp+=$vimfiles"; $args | % {$_} } $args;
 

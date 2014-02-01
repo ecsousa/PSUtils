@@ -19,6 +19,8 @@ $paths = ([string[]] ((
 if($paths) {
     $fsiPath = $paths[0];
 
+    Write-Verbose "[PSUtils] Set FSI alias to '$fsiPath'"
+
     # F# Scripts
     function Set-NugetRefs {
         $fsiArgs = & { Join-Path $PSScriptRoot Set-NugetRefs.fsx; $args };
@@ -29,7 +31,9 @@ if($paths) {
 
     Export-ModuleMember -function Set-NugetRefs
     Export-ModuleMember -alias fsi
-
+}
+else {
+    Write-Verbose "[PSUtils] Could not find fsi.exe"
 }
 
 ## Cusom Actions

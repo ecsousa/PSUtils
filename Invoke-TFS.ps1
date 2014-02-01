@@ -9,12 +9,13 @@ function Invoke-TFS {
         ? { Test-Path $_ })
 
     if(-not $tfPaths) {
-        Write-Warning 'Não foi possível localizar tf.exe'
+        Write-Warning "Could not find tf.exe"
         return
     }
 
-    Write-Verbose ('Usando tf.exe em ' + $tfPaths[0])
+    Write-Verbose ("Invoking tf.exe from '" + $tfPaths[0] + "'")
 
     & ($tfPaths[0]) $args
+
 }
 
