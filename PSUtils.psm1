@@ -23,13 +23,19 @@ if($paths) {
 
     # F# Scripts
     function Set-NugetRefs {
-        $fsiArgs = & { Join-Path $PSScriptRoot Set-NugetRefs.fsx; $args };
+        $fsiArgs = & { "--codepage:1252"; Join-Path $PSScriptRoot Set-NugetRefs.fsx; $args | %{$_} } $args;
+        & ( $fsiPath ) $fsiArgs
+    }
+
+    function Update-SymbolIndex {
+        $fsiArgs = & { "--codepage:1252"; Join-Path $PSScriptRoot Update-SymbolIndex.fsx; $args | %{$_} } $args;
         & ( $fsiPath ) $fsiArgs
     }
 
     Set-Alias fsi $fsiPath
 
     Export-ModuleMember -function Set-NugetRefs
+    Export-ModuleMember -function Update-SymbolIndex
     Export-ModuleMember -alias fsi
 }
 else {
