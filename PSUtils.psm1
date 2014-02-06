@@ -78,6 +78,12 @@ Set-Alias awk (Join-Path $PSScriptRoot 'GnuWin32\bin\awk.exe')
 Set-Alias gawk (Join-Path $PSScriptRoot 'GnuWin32\bin\gawk.exe')
 Set-Alias less (Join-Path $PSScriptRoot 'GnuWin32\bin\less.exe')
 
+# dbgtools aliases
+Set-Alias symchk (Join-Path $PSScriptRoot 'dbgtools\symchk.exe')
+Set-Alias symstore (Join-Path $PSScriptRoot 'dbgtools\symstore.exe')
+Set-Alias pdbstr (Join-Path $PSScriptRoot 'dbgtools\pdbstr.exe')
+Set-Alias srctool (Join-Path $PSScriptRoot 'dbgtools\srctool.exe')
+
 # Export scripts
 Export-ModuleMember -function Invoke-ForeachParallel
 Export-ModuleMember -function Set-VS2012
@@ -113,4 +119,10 @@ Export-ModuleMember -alias tar
 Export-ModuleMember -alias awk
 Export-ModuleMember -alias gawk
 Export-ModuleMember -alias less
+
+# Export dbgtools aliases
+Export-ModuleMember -alias symchk
+Export-ModuleMember -alias symstore
+Export-ModuleMember -alias pdbstr
+Export-ModuleMember -alias srctool
 
