@@ -21,7 +21,7 @@ let relativePath file =
 let pdbstrPath = relativePath @"dbgtools\pdbstr.exe"
 let srctoolPath = relativePath @"dbgtools\srctool.exe"
 
-let pdb = fsi.CommandLineArgs.[1] // @"D:\DRNET\trunk\release\04.008\Componentes\DrnCpuLogicas\DrnCpuLogicas\bin\Debug\attps.Biblioteca.DrNet.Logica.pdb"
+let pdb = fsi.CommandLineArgs.[1]
 
 let execute fileName arguments =
     let psi = ProcessStartInfo(fileName, arguments)
