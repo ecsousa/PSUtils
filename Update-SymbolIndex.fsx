@@ -10,6 +10,8 @@ open System.Text.RegularExpressions
 open Microsoft.TeamFoundation.Client
 open Microsoft.TeamFoundation.VersionControl.Client
 
+exception NotFoundInTFS of string list
+
 if fsi.CommandLineArgs.Length < 2 then
     printfn "É necessário infomar o(s) arquivo(s) .pdb a ser(em) indexado(s)"
     Environment.Exit(1)
@@ -79,10 +81,7 @@ let makeSrcsrv pdb =
             let wi = fst info
 
             if wi = null then
-                printfn "Não é possível indexar o arquivo .pdb. Os seguintes arquivos não foram encontrados em um Workspace do TFS:"
-                for file in snd info do
-                    printfn " - %s" file
-                Environment.Exit(1)
+                raise (NotFoundInTFS (snd info |> Seq.toList))
 
             yield (sprintf "%s=%s" (serverName wi)) (wi.ServerUri.ToString())
 
@@ -126,9 +125,15 @@ let regPattern = Regex(@"^(.*\\)?([^\\]+)$")
 for filePattern in Seq.skip 1 fsi.CommandLineArgs do
     let mat = regPattern.Match(filePattern)
 
-    for file in Directory.EnumerateFiles((if mat.Groups.[1].Length = 0 then "." else mat.Groups.[1].Value), mat.Groups.[2].Value) do
-        printf "[__] Indexando arquivo %s..." file
-        writeSrcsrv file
-        printf "\r[OK] Indexando arquivo %s..." file
+    for pdbFile in Directory.EnumerateFiles((if mat.Groups.[1].Length = 0 then "." else mat.Groups.[1].Value), mat.Groups.[2].Value) do
+        printf "[__] Indexando arquivo %s..." pdbFile
+        try
+            writeSrcsrv pdbFile
+            printfn "\r[OK] Indexando arquivo %s..." pdbFile
+        with
+            | NotFoundInTFS notFoundFiles ->
+                printfn "\r[ERRO] Não foi possível indexar arquivo %s" pdbFile
+                printfn "Os seguintes arquivos não foram encontrados no TFS:"
+                for notFoundFile in notFoundFiles do
+                    printfn " - %s" notFoundFile
 
-printfn ""
