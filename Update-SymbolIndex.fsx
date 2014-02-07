@@ -10,12 +10,14 @@ open System.Text.RegularExpressions
 open Microsoft.TeamFoundation.Client
 open Microsoft.TeamFoundation.VersionControl.Client
 
-if fsi.CommandLineArgs.Length < 2 then
-    printfn "É necessário infomar o(s) arquivo(s) .pdb a ser(em) indexado(s)"
-    Environment.Exit(1)
 
 let relativePath file =
-    let myPath = FileInfo(fsi.CommandLineArgs.[0]).DirectoryName
+#if INTERACTIVE    
+    let myFile = fsi.CommandLineArgs.[0]
+#else
+    let myFile = Reflection.Assembly.GetEntryAssembly().Location
+#endif
+    let myPath = FileInfo(myFile).DirectoryName
     Path.Combine(myPath, file)
 
 let pdbstrPath = relativePath @"dbgtools\pdbstr.exe"
@@ -149,13 +151,26 @@ let writeSrcsrv pdb =
 
 
 let regPattern = Regex(@"^(.*\\)?([^\\]+)$")
-for filePattern in Seq.skip 1 fsi.CommandLineArgs do
-    let mat = regPattern.Match(filePattern)
 
-    for pdbFile in Directory.EnumerateFiles((if mat.Groups.[1].Length = 0 then "." else mat.Groups.[1].Value), mat.Groups.[2].Value) do
-        printfn "Indexando arquivo %s..." pdbFile
-        if writeSrcsrv pdbFile then
-            printfn "Arquivo %s indexado" pdbFile
-        else
-            printfn "Arquivo %s não foi indexado" pdbFile
+#if COMPILED
+[<EntryPoint>]
+#endif
+let main(args: string[]) =  
+    if args.Length = 0 then
+        printfn "É necessário infomar o(s) arquivo(s) .pdb a ser(em) indexado(s)"
+        1
+    else
+        for filePattern in args do
+            let mat = regPattern.Match(filePattern)
 
+            for pdbFile in Directory.EnumerateFiles((if mat.Groups.[1].Length = 0 then "." else mat.Groups.[1].Value), mat.Groups.[2].Value) do
+                printfn "Indexando arquivo %s..." pdbFile
+                if writeSrcsrv pdbFile then
+                    printfn "Arquivo %s indexado" pdbFile
+                else
+                    printfn "Arquivo %s não foi indexado" pdbFile
+        0
+
+#if INTERACTIVE
+main (Seq.skip 1 (fsi.CommandLineArgs) |> Seq.toArray)
+#endif
