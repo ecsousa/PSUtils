@@ -11,7 +11,7 @@ open Microsoft.TeamFoundation.Client
 open Microsoft.TeamFoundation.VersionControl.Client
 
 if fsi.CommandLineArgs.Length < 2 then
-    printfn "É necessário infomar o arquivo .pdb a ser indexado"
+    printfn "É necessário infomar o(s) arquivo(s) .pdb a ser(em) indexado(s)"
     Environment.Exit(1)
 
 let relativePath file =
@@ -20,8 +20,6 @@ let relativePath file =
 
 let pdbstrPath = relativePath @"dbgtools\pdbstr.exe"
 let srctoolPath = relativePath @"dbgtools\srctool.exe"
-
-let pdb = fsi.CommandLineArgs.[1]
 
 let execute fileName arguments =
     let psi = ProcessStartInfo(fileName, arguments)
@@ -98,9 +96,17 @@ let makeSrcsrv pdb =
             let vcs = tpc.GetService<VersionControlServer>()
             let wsp = vcs.GetWorkspace(wi)
 
-            for file in snd info do
-                let item = vcs.GetItem(file)
-                yield (sprintf "%s*%s*%s*%d" file (serverName wi) item.ServerItem item.ChangesetId)
+            let specs =
+                snd info
+                |> Seq.map (fun file -> ItemSpec(file, RecursionType.None))
+                |> Seq.toArray
+
+            let locals =
+                wsp.GetLocalVersions(specs, false)
+                |> Seq.collect id
+
+            for local in locals do
+                yield (sprintf "%s*%s*%s*%d" local.Item (serverName wi) (wsp.GetServerItemForLocalItem local.Item) local.Version)
 
         yield "SRCSRV: end ------------------------------------------------"
     }
@@ -116,5 +122,13 @@ let writeSrcsrv pdb =
     finally
         File.Delete(tempFile)
 
-writeSrcsrv pdb
+let regPattern = Regex(@"^(.*\\)?([^\\]+)$")
+for filePattern in Seq.skip 1 fsi.CommandLineArgs do
+    let mat = regPattern.Match(filePattern)
 
+    for file in Directory.EnumerateFiles((if mat.Groups.[1].Length = 0 then "." else mat.Groups.[1].Value), mat.Groups.[2].Value) do
+        printf "[__] Indexando arquivo %s..." file
+        writeSrcsrv file
+        printf "\r[OK] Indexando arquivo %s..." file
+
+printfn ""
