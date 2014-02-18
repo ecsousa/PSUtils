@@ -4,7 +4,7 @@ function Set-VS2013 {
         return;
     }
 
-    $vsvars32FullPath = Join-Path $env:VS110COMNTOOLS "vsvars32.bat"
+    $vsvars32FullPath = Join-Path $env:VS120COMNTOOLS "vsvars32.bat"
 
     if(-not(Test-Path $vsvars32FullPath)) {
         Write-Warning "Could not find file '$vsvars32FullPath'";
