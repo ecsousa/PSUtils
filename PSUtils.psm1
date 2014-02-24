@@ -42,6 +42,12 @@ else {
     Write-Verbose "[PSUtils] Could not find fsi.exe"
 }
 
+#VC Tools
+If($env:VCINSTALLDIR) {
+    Set-Alias dumpbin $env:VCINSTALLDIR\BIN\dumpbin.exe
+    Export-ModuleMember -alias dumpbin
+}
+
 ## Cusom Actions
 if(Test-Path (Join-Path $env:USERPROFILE PSUtils-Custom.ps1))
 {

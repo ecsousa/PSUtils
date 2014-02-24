@@ -28,6 +28,7 @@ autocmd BufNewFile,BufRead *.targets set ft=xml
 autocmd BufNewFile,BufRead *.proj set ft=xml
 autocmd BufNewFile,BufRead *.targets set ft=xml
 autocmd BufNewFile,BufRead *.props set ft=xml
+autocmd BufNewFile,BufRead *.fsx set ft=fs
 
 autocmd BufNewFile,BufRead *.wxi set ft=xml
 autocmd BufNewFile,BufRead *.wxs set ft=xml

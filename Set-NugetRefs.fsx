@@ -24,7 +24,8 @@ let prefixes =
         failwith (sprintf "Arquivo %s nao existe" arquivo)
 
     seq {
-        for linha in File.ReadAllLines(arquivo) do
+        for linha in File.ReadAllLines(arquivo)
+            |> Seq.where (fun x -> x.Trim().Length > 0) do
             let m = regLinha.Match(linha)
 
             if not (m.Success) then
@@ -105,6 +106,8 @@ let prefixesReg =
         Regex((sprintf  @"(?i)\\(%s[^\\]*)\\" (Regex.Escape prefix)))
         )
 
+let regPkgVer = Regex(@"(\.\d+){1,4}(-\w+)?\\")
+
 // Precorrer arquivos .csproj
 for csproj in csprojs do
 
@@ -120,7 +123,8 @@ for csproj in csprojs do
                         
                         // Alterar nome do diretório no HintPath
                         let hintNode = node.SelectSingleNode("p:HintPath", xnm)
-                        hintNode.InnerText <- (reg.Replace(hintNode.InnerText, (sprintf "\\%s.%s\\" prefix version )))
+                        
+                        hintNode.InnerText <- (regPkgVer.Replace(hintNode.InnerText, (sprintf ".%s\\" version )))
         )
 
         printfn "Arquivo %s processando com sucesso." csproj
