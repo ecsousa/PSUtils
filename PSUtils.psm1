@@ -42,10 +42,22 @@ else {
     Write-Verbose "[PSUtils] Could not find fsi.exe"
 }
 
+$vcDir = ([string[]] ((
+    $env:VS120COMNTOOLS,
+    $env:VS110COMNTOOLS,
+    $env:VS100COMNTOOLS) |
+    ? { $_} |
+    % { Join-Path $_ ..\..\VC } |
+    ? { Test-Path $_}))[0]
+
 #VC Tools
-If($env:VCINSTALLDIR) {
-    Set-Alias dumpbin $env:VCINSTALLDIR\BIN\dumpbin.exe
+If($vcDir) {
+    Write-Verbose "[PSUtils] VC directory found on $vcDir";
+    Set-Alias dumpbin $vcDir\BIN\dumpbin.exe
     Export-ModuleMember -alias dumpbin
+}
+else {
+    Write-Verbose "[PSUtils] VC directory not found";
 }
 
 ## Cusom Actions
