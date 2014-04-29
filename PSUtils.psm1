@@ -8,6 +8,27 @@ if($mappings) {
 }
 
 
+#FSC Path
+$paths = ([string[]] ((
+    'C:\Program Files (x86)\Microsoft SDKs\F#\3.1\Framework\v4.0\Fsc.exe',
+    'C:\Program Files\Microsoft SDKs\F#\3.1\Framework\v4.0\Fsc.exe',
+    'C:\Program Files (x86)\Microsoft SDKs\F#\3.0\Framework\v4.0\Fsc.exe',
+    'C:\Program Files\Microsoft SDKs\F#\3.0\Framework\v4.0\Fsc.exe'
+    ) | ? { Test-Path $_ }))
+
+if($paths) {
+    $fscPath = $paths[0];
+
+    Write-Verbose "[PSUtils] Set FSC alias to '$fscPath'"
+
+    Set-Alias fsc $fscPath
+
+    Export-ModuleMember -alias fsc
+}
+else {
+    Write-Verbose "[PSUtils] Could not find fsc.exe"
+}
+
 #FSI Path
 $paths = ([string[]] ((
     'C:\Program Files (x86)\Microsoft SDKs\F#\3.1\Framework\v4.0\Fsi.exe',
