@@ -25,8 +25,9 @@ autocmd BufNewFile,BufRead *.ps1 set ft=ps1
 autocmd BufNewFile,BufRead *.psm1 set ft=ps1
 autocmd BufNewFile,BufRead *.msbuild set ft=xml
 autocmd BufNewFile,BufRead *.targets set ft=xml
+autocmd BufNewFile,BufRead *.properties set ft=xml
+autocmd BufNewFile,BufRead *.tasks set ft=xml
 autocmd BufNewFile,BufRead *.proj set ft=xml
-autocmd BufNewFile,BufRead *.targets set ft=xml
 autocmd BufNewFile,BufRead *.props set ft=xml
 autocmd BufNewFile,BufRead *.fsx set ft=fs
 
