@@ -102,6 +102,7 @@ if(Test-Path (Join-Path $env:USERPROFILE PSUtils-Custom.ps1))
 . (Join-Path $PSScriptRoot Set-Clipboard.ps1)
 . (Join-Path $PSScriptRoot Get-Clipboard.ps1)
 . (Join-Path $PSScriptRoot Start-Elevated.ps1)
+. (Join-Path $PSScriptRoot Get-Shelveset.ps1)
 
 # Aliases
 Set-Alias %p Invoke-ForeachParallel
@@ -120,6 +121,7 @@ Set-Alias prompt Write-Prompt
 Set-Alias scb Set-Clipboard
 Set-Alias gcb Get-Clipboard
 Set-Alias sudo Start-Elevated
+Set-Alias unshelve Get-Shelveset
 
 # GNU Win32 Aliases
 Set-Alias sed (Join-Path $PSScriptRoot 'GnuWin32\bin\sed.exe')
@@ -153,6 +155,7 @@ Export-ModuleMember -function Add-Link
 Export-ModuleMember -function Set-Clipboard
 Export-ModuleMember -function Get-Clipboard
 Export-ModuleMember -function Start-Elevated
+Export-ModuleMember -function Get-Shelveset
 
 #Export aliases
 Export-ModuleMember -alias %p
@@ -171,6 +174,7 @@ Export-ModuleMember -alias prompt
 Export-ModuleMember -alias scb
 Export-ModuleMember -alias gcb
 Export-ModuleMember -alias sudo
+Export-ModuleMember -alias unshelve
 
 #Export GNU Win32 Aliases
 Export-ModuleMember -alias sed
@@ -189,3 +193,5 @@ Export-ModuleMember -alias symstore
 Export-ModuleMember -alias pdbstr
 Export-ModuleMember -alias srctool
 
+$host.UI.RawUI.ForegroundColor = 'Gray'
+$host.UI.RawUI.BackgroundColor = 'Black'

@@ -9,7 +9,13 @@ function Write-Prompt {
 
     Write-Host ([System.Char](10) + $((([regex] '\\\.\.\\[^\\\.>]+').Replace((gl).Path, '\'))) + $(if ($nestedpromptlevel -ge 1) { '>>' }) + '>') -NoNewLine -ForegroundColor Green;
 
-    return " `b";
+    if($host.Name -like 'StudioShell*') {
+        return " ";
+    }
+    else {
+        return " `b";
+    }
+
 
 }
 
