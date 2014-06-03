@@ -1,26 +1,33 @@
 function Set-Signature {
     param(
             [Parameter(Position=0, Mandatory=$TRUE, ValueFromPipeline=$TRUE)]
-            [IO.FileInfo] $file
+            [IO.FileInfo] $file,
+            [Parameter(Position=1, Mandatory=$FALSE, ValueFromPipeline=$FALSE)]
+            [System.Security.Cryptography.X509Certificates.X509Certificate] $Certificate
          );
 
     begin {
-        $cert = (dir cert:currentuser\my\ -CodeSigningCert | ? { $_.Extensions })
-        if(-not ($cert) ) {
-            Write-Error 'Could not find certificate for signing'
+        if(-not $Certificate) {
+            $Certificate = (dir cert:currentuser\my\ -CodeSigningCert | ? { $_.Extensions } | Select-Object -First 1)
+        }
+
+        if(-not ($Certificate) ) {
+            Write-Warning 'Could not find certificate for signing'
             return
         }
     }
     process {
-        Set-AuthenticodeSignature $file -Certificate $cert -IncludeChain all -TimestampServer http://timestamp.verisign.com/scripts/timstamp.dll
+        if($Certificate) {
+            Set-AuthenticodeSignature $file -Certificate $Certificate -IncludeChain all -TimestampServer http://timestamp.verisign.com/scripts/timstamp.dll
+        }
     }
 }
 
 # SIG # Begin signature block
 # MIId3wYJKoZIhvcNAQcCoIId0DCCHcwCAQExCzAJBgUrDgMCGgUAMGkGCisGAQQB
 # gjcCAQSgWzBZMDQGCisGAQQBgjcCAR4wJgIDAQAABBAfzDtgWUsITrck0sYpfvNR
-# AgEAAgEAAgEAAgEAAgEAMCEwCQYFKw4DAhoFAAQUOtiEhTtFaIsrgXFe6diCUWWA
-# /wygghjPMIID7jCCA1egAwIBAgIQfpPr+3zGTlnqS5p31Ab8OzANBgkqhkiG9w0B
+# AgEAAgEAAgEAAgEAAgEAMCEwCQYFKw4DAhoFAAQUMbr02Y75WaK6PVDwF21tsdHy
+# LdagghjPMIID7jCCA1egAwIBAgIQfpPr+3zGTlnqS5p31Ab8OzANBgkqhkiG9w0B
 # AQUFADCBizELMAkGA1UEBhMCWkExFTATBgNVBAgTDFdlc3Rlcm4gQ2FwZTEUMBIG
 # A1UEBxMLRHVyYmFudmlsbGUxDzANBgNVBAoTBlRoYXd0ZTEdMBsGA1UECxMUVGhh
 # d3RlIENlcnRpZmljYXRpb24xHzAdBgNVBAMTFlRoYXd0ZSBUaW1lc3RhbXBpbmcg
@@ -159,22 +166,22 @@ function Set-Signature {
 # YXNzIDMgQ29kZSBTaWduaW5nIDIwMTAgQ0ECEGFMTivC9jVVerSK1A4n/6kwCQYF
 # Kw4DAhoFAKB4MBgGCisGAQQBgjcCAQwxCjAIoAKAAKECgAAwGQYJKoZIhvcNAQkD
 # MQwGCisGAQQBgjcCAQQwHAYKKwYBBAGCNwIBCzEOMAwGCisGAQQBgjcCARUwIwYJ
-# KoZIhvcNAQkEMRYEFERr4chxd0Gs3QL1lqvDfeLjiB/TMA0GCSqGSIb3DQEBAQUA
-# BIIBAC1oSEgR/5XcJ/9nHHpNMQyoSYFlTD8rv7rot30RWb4KNdxKZC33zzFXCC7H
-# ez+ppi0uZKGi3eWe+qj1WjKn19deVQo1y3FNlr4rZw8vlBcTtg0fa0KxwJh9s6OG
-# pYZzNIi3uKFAS4U/HfRg8qFVT+1r9bFI61YzDDx7diBocD9NCPbtQ+etojugwbrb
-# hhwUs2pq6UgHdlAZ9xFGJpi963JMYfOGyFiZlcf/J6nJ1orD8S39OL1VkdQ3yLxK
-# 2hoifch0Xd9xHaCEw4XyPKeAtlSDlwapYQHQYI/C08RhZIM6wRmTiyotdpQw77BX
-# qUY6Wz6vs21cwRmBQh92FiDzkSOhggILMIICBwYJKoZIhvcNAQkGMYIB+DCCAfQC
+# KoZIhvcNAQkEMRYEFCEe1DhFCTg4gAT/XEZQXQxm8NCuMA0GCSqGSIb3DQEBAQUA
+# BIIBAJj+yzazn2che8L0sU3UjAFw4hBT9Q2sH1Owffri9aXgRVT6L2X3Zh3BuQu8
+# NoVeylOKFq2qgo43T9aJVZMxvC3af/X4YGJP81u1O8lrAzEvm/93UvOl6hCjvCNM
+# rJovulL8Tiiq7QBpyzCRg1J8FseB9/WluO8OTcn0jbq+c63MXtMy0AjZm55THHBN
+# gUf0SAnaVgRe9NrzdrChQHjMInOawo0gWZAysTr2DooNkxRendPJC9pFExwArrt3
+# yafLv/AFmp5Bb+F55Fxg+NSJrnYjZOqXVnthMXWYRxg2mMCZUNMoSPb/SpqZV+Kz
+# Cd+c/nCN+jh3ydOsD2EzNbUzYvKhggILMIICBwYJKoZIhvcNAQkGMYIB+DCCAfQC
 # AQEwcjBeMQswCQYDVQQGEwJVUzEdMBsGA1UEChMUU3ltYW50ZWMgQ29ycG9yYXRp
 # b24xMDAuBgNVBAMTJ1N5bWFudGVjIFRpbWUgU3RhbXBpbmcgU2VydmljZXMgQ0Eg
 # LSBHMgIQDs/0OMj+vzVuBNhqmBsaUDAJBgUrDgMCGgUAoF0wGAYJKoZIhvcNAQkD
-# MQsGCSqGSIb3DQEHATAcBgkqhkiG9w0BCQUxDxcNMTQwNjAzMTQxNzI4WjAjBgkq
-# hkiG9w0BCQQxFgQUJbK2W4fE/DoM3aH7ctJLpRTpA/4wDQYJKoZIhvcNAQEBBQAE
-# ggEAKa/whFPAr+eY8FWoJG50oEDC+bqymdho6dXNe6PuMBrR73wI8qoU75d2wS/d
-# T26erNZ2aDD4XWsYHIGLSxj98Y75RWP27psJ2+k2gQtUO+gtzXmsHeAFm5FkVDXa
-# yCJYqyzWyNqlGqA7TXhumL7mMCNUYCE4ZETEV/Bdry9bPOmbD6TwgPRmzR/NHZj3
-# hDHbyzf0DVlVu+KQDGZgLX7fUqUsMsRxxZf/I8fb/yaegJBNiBLMxMKQKmB5IWI2
-# 6kgnty9JZrAZHp4I8V7MYMcsGFZD6ahFb1Ax1BQ2tnjnt1C1OZiJECHDt7stn+YY
-# IWBVZFpUbaaSJl0aPRomrftEHw==
+# MQsGCSqGSIb3DQEHATAcBgkqhkiG9w0BCQUxDxcNMTQwNjAzMTc1NzQwWjAjBgkq
+# hkiG9w0BCQQxFgQUveErtfFWGWHFp1GGplT1AW2HJOQwDQYJKoZIhvcNAQEBBQAE
+# ggEAcxgmoKZ8bDzsE9O9tmexH7j8O0U0zm7s2yd0zXgG6PjJBeEZhgPFPb/Gc25j
+# PDR361aw7xuS8Sp/IzrTGcyQLR8PfBfRQNoDJCh/JSJzzjdLunE+Afu8qGAUap/L
+# MDPciKpBtxb4mGGGkrHwzjw6SC/11eva7GPcN6dzogiJ6eG7IV+Lhb4JAbnQVNV5
+# iszarlwRq0zTZ839cbYzes80TQeAXZlxE7RJaSixjJbMJ4BFph5lJYgGuhR+CYYt
+# 7kmawiwGcHZi+Of4hSCWPNzA2fDNpkS6k1mTQa6WCad9xiJI7qRlN4tq9GFZpF1p
+# bgItkGJWW5nlscI5NsP7nEnX6Q==
 # SIG # End signature block
