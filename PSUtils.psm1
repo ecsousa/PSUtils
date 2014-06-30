@@ -104,6 +104,7 @@ if(Test-Path (Join-Path $env:USERPROFILE PSUtils-Custom.ps1))
 . (Join-Path $PSScriptRoot Start-Elevated.ps1)
 . (Join-Path $PSScriptRoot Get-Shelveset.ps1)
 . (Join-Path $PSScriptRoot Set-Signature.ps1)
+. (Join-Path $PSScriptRoot Install-ConEmu.ps1)
 
 # Aliases
 Set-Alias %p Invoke-ForeachParallel
@@ -124,6 +125,7 @@ Set-Alias gcb Get-Clipboard
 Set-Alias sudo Start-Elevated
 Set-Alias unshelve Get-Shelveset
 Set-Alias sign Set-Signature
+Set-Alias 7z (Join-Path $PSScriptRoot '7z\7z.exe')
 
 # GNU Win32 Aliases
 Set-Alias sed (Join-Path $PSScriptRoot 'GnuWin32\bin\sed.exe')
@@ -159,6 +161,7 @@ Export-ModuleMember -function Get-Clipboard
 Export-ModuleMember -function Start-Elevated
 Export-ModuleMember -function Get-Shelveset
 Export-ModuleMember -function Set-Signature
+Export-ModuleMember -function Install-ConEmu
 
 #Export aliases
 Export-ModuleMember -alias %p
@@ -180,6 +183,7 @@ Export-ModuleMember -alias sudo
 Export-ModuleMember -alias unshelve
 Export-ModuleMember -alias sign
 
+
 #Export GNU Win32 Aliases
 Export-ModuleMember -alias sed
 Export-ModuleMember -alias gzip
@@ -190,6 +194,7 @@ Export-ModuleMember -alias tar
 Export-ModuleMember -alias awk
 Export-ModuleMember -alias gawk
 Export-ModuleMember -alias less
+Export-ModuleMember -alias 7z
 
 # Export dbgtools aliases
 Export-ModuleMember -alias symchk
