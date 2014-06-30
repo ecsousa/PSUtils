@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <key name="Software">
 	<key name="ConEmu">
-		<key name=".Vanilla" modified="2014-06-03 11:25:49" build="140122">
+		<key name=".Vanilla" modified="2014-06-30 15:55:09" build="140122">
 			<value name="ColorTable00" type="dword" data="00000000"/>
 			<value name="ColorTable01" type="dword" data="00800000"/>
 			<value name="ColorTable02" type="dword" data="00008000"/>
@@ -127,8 +127,8 @@
 			<value name="ConWnd Width" type="dword" data="0000008a"/>
 			<value name="ConWnd Height" type="dword" data="00000027"/>
 			<value name="Cascaded" type="hex" data="01"/>
-			<value name="ConWnd X" type="dword" data="00000058"/>
-			<value name="ConWnd Y" type="dword" data="00000081"/>
+			<value name="ConWnd X" type="dword" data="0000003a"/>
+			<value name="ConWnd Y" type="dword" data="0000008d"/>
 			<value name="16bit Height" type="dword" data="00000000"/>
 			<value name="AutoSaveSizePos" type="hex" data="01"/>
 			<value name="IntegralSize" type="hex" data="00"/>
@@ -154,7 +154,7 @@
 			<value name="ComSpec.EnvAddPath" type="hex" data="01"/>
 			<value name="ComSpec.EnvAddExePath" type="hex" data="01"/>
 			<value name="ComSpec.UncPaths" type="hex" data="01"/>
-			<value name="ComSpec.Path" type="string" data="C:\Windows\System32\WindowsPowerShell\v1.0\powershell.exe -NoExit -Command &quot;Import-Module ([regex] ('(?i)\\' + ([regex]::Escape((gi .).Name)) + '\\?$')).Replace((cvpa .), '\PSUtils'); cd $env:UserProfile&quot;"/>
+			<value name="ComSpec.Path" type="string" data="C:\Windows\System32\WindowsPowerShell\v1.0\powershell.exe -ExecutionPolicy Unrestricted -NoExit -Command &quot;Import-Module ([regex] ('(?i)\\' + ([regex]::Escape((gi .).Name)) + '\\?$')).Replace((cvpa .), '\PSUtils'); cd $env:UserProfile&quot;"/>
 			<value name="ConsoleTextSelection" type="hex" data="01"/>
 			<value name="CTS.AutoCopy" type="hex" data="01"/>
 			<value name="CTS.EndOnTyping" type="hex" data="00"/>
