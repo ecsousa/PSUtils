@@ -20,6 +20,8 @@ if(-not(Test-Path PSUtils)) {
 
     }
 
+    $git = Find-Git
+
     if(-not($git)) {
         Write-Warning "Could not find or install Git";
         return;
