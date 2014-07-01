@@ -37,8 +37,12 @@ if(-not(Test-Path ConEmu)) {
 }
 
 if($env:PROCESSOR_ARCHITECTURE -eq 'x64') {
+    push .\ConEmu
     & .\ConEmu\ConEmu64
+    popd
 }
 else {
+    push .\ConEmu
     & .\ConEmu\ConEmu32
+    popd
 }
