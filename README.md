@@ -51,6 +51,7 @@ command in PowerShell inside the folder where they should be installed:
     Invoke-Expression (Invoke-WebRequest https://bitbucket.org/ecsousa/psutils/raw/HEAD/bootstrapInstall.ps1).Content
 
 PS:
+
 * It will also install Git client if not found
 * ConEmu will only be installed if PowerShell is **NOT** in restricted execution policy.
  
