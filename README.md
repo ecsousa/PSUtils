@@ -43,6 +43,8 @@ Powershell in startup with PSUtils module imported.
 Alternatively, you can execute Install-ConEmu.cmd CMD script, which will execute
 PowerShell, install ConEmu as described above, and then execute it.
 
+*PS: This will require PowerShell 3.0*
+
 ## Bootstrap installing
 
 You can also easily install PSUtils and ConEmu in any given folder by executing the following
@@ -52,6 +54,7 @@ command in PowerShell inside the folder where they should be installed:
 
 PS:
 
+* This will require PowerShell 3.0
 * It will also install Git client if not found
 * ConEmu will only be installed if PowerShell is **NOT** in restricted execution policy.
  
