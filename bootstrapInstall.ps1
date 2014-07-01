@@ -35,3 +35,10 @@ if(-not(Test-Path ConEmu)) {
         Write-Warning "Execunting this again with less restrictive executing policy will install it"
     }
 }
+
+if($env:PROCESSOR_ARCHITECTURE -eq 'x64') {
+    & .\ConEmu\ConEmu64
+}
+else {
+    & .\ConEmu\ConEmu32
+}
