@@ -12,7 +12,7 @@ command line option)
 
 ## Import Module
 
-To impor PSUtils module, you just have to execute the following
+To import PSUtils module, you just have to execute the following
 command in PowerShell:
 
     Import-Module <Path to PSUtils folder>
@@ -20,7 +20,7 @@ command in PowerShell:
 (as you would with any other PowerShell script module)
 
 Alternatively, if the PSUtils parent folder is listed
-in PSModulePath, you can just execute:
+in PSModulePath environment variable, you can just execute:
 
     Import-Module PSUtils
 
@@ -32,15 +32,17 @@ update, you will have to execute:
 ## ConEmu
 
 PSUtil works greatly with [ConEmu](https://code.google.com/p/conemu-maximus5/)!
-It has included a script to install its lastest version. If you execute the
+It have a script to install its lastest version. If you execute the
 following PSUtils command:
 
     Install-ConEmu
 
-It will install ConEmu at PSUtils parent folder, and configure it to open
+it will install ConEmu at PSUtils parent folder, and configure it to open
 Powershell in startup with PSUtils module imported.
 
 Alternatively, you can execute Install-ConEmu.cmd CMD script, which will execute
 PowerShell, install ConEmu as described above, and then execute it.
  
+---
+
 Hope you'll all enjoy it!
