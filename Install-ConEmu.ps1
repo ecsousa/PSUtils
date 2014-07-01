@@ -1,6 +1,20 @@
 
 function Install-ConEmu {
 
+    $path = (Join-Path $PSScriptRoot '..\ConEmu\')
+
+    if(Test-Path $path) {
+        $choices = [System.Management.Automation.Host.ChoiceDescription[]] @("&Yes", "&No")
+        $choice = $host.UI.PromptForChoice('Overwrite Confirmation', 'ConEmu directory already exists. Want to overwrite it?', $choices, 1)
+
+        if($choice -eq 0) {
+            rm -rec -for ..\ConEmu
+        }
+        else {
+            return
+        }
+    }
+
     $conemu = [xml] (Invoke-WebRequest 'https://code.google.com/feeds/p/conemu-maximus5/downloads/basic').Content
 
     $entry = $conemu.feed.entry | ? {$_.title.Split([System.Environment]::NewLine)[1] -like '*ConEmuPack.*.7z*'}
@@ -19,7 +33,6 @@ function Install-ConEmu {
         return;
     }
 
-    $path = (Join-Path $PSScriptRoot '..\ConEmu\')
 
     if(-not (Test-Path $path)) {
         mkdir $path | out-null
