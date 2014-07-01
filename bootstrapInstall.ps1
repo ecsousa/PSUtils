@@ -10,14 +10,19 @@ if(-not(Test-Path PSUtils)) {
 
         Invoke-WebRequest 'https://github.com/msysgit/msysgit/releases/download/Git-1.9.4-preview20140611/Git-1.9.4-preview20140611.exe' -OutFile .\install-git.exe
 
-        [System.Diagnostics.Process]::Start('.\install-git.exe').WaitForExit();
+        $proc = [System.Diagnostics.Process]::Start((cvpa '.\install-git.exe'))
+        
+        if($proc) {
+            $proc.WaitForExit();
 
-        rm .\install-git.exe
+            rm .\install-git.exe
+        }
 
     }
 
     if(-not($git)) {
         Write-Warning "Could not find or install Git";
+        return;
     }
 
     & $git clone https://bitbucket.org/ecsousa/psutils PSUtils
