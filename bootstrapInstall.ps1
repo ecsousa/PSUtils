@@ -8,6 +8,13 @@ if(-not(Test-Path PSUtils)) {
 
     if(-not($git)) {
 
+        $choices = [System.Management.Automation.Host.ChoiceDescription[]] @("&Yes", "&No")
+        $choice = $host.UI.PromptForChoice('Git download', 'Git was not found. Do you want to download it?', $choices, 1)
+
+        if($choice -eq 1) {
+            return;
+        }
+
         Invoke-WebRequest 'https://github.com/msysgit/msysgit/releases/download/Git-1.9.4-preview20140611/Git-1.9.4-preview20140611.exe' -OutFile .\install-git.exe
 
         $proc = [System.Diagnostics.Process]::Start((cvpa '.\install-git.exe'))
@@ -18,9 +25,9 @@ if(-not(Test-Path PSUtils)) {
             rm .\install-git.exe
         }
 
+        $git = Find-Git
     }
 
-    $git = Find-Git
 
     if(-not($git)) {
         Write-Warning "Could not find or install Git";
