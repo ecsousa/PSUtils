@@ -34,7 +34,7 @@ if(-not(Test-Path PSUtils)) {
         return;
     }
 
-    & $git clone https://bitbucket.org/ecsousa/psutils PSUtils
+    & $git clone https://github.com/ecsousa/PSUtils.git PSUtils
 }
 
 if(-not(Test-Path ConEmu)) {

@@ -50,7 +50,7 @@ PowerShell, install ConEmu as described above, and then execute it.
 You can also easily install PSUtils and ConEmu in any given folder by executing the following
 command in PowerShell inside the folder where they should be installed:
 
-    Invoke-Expression (Invoke-WebRequest https://bitbucket.org/ecsousa/psutils/raw/HEAD/bootstrapInstall.ps1).Content
+    Invoke-Expression (Invoke-WebRequest https://raw.githubusercontent.com/ecsousa/PSUtils/master/bootstrapInstall.ps1).Content
 
 PS:
 
