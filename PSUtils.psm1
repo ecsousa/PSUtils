@@ -92,6 +92,7 @@ if(Test-Path (Join-Path $env:USERPROFILE PSUtils-Custom.ps1))
 . (Join-Path $PSScriptRoot Set-VS2010.ps1)
 . (Join-Path $PSScriptRoot Set-VS2012.ps1)
 . (Join-Path $PSScriptRoot Set-VS2013.ps1)
+. (Join-Path $PSScriptRoot Set-WAIK.ps1)
 . (Join-Path $PSScriptRoot Write-Prompt.ps1)
 . (Join-Path $PSScriptRoot Get-FindLocation.ps1)
 . (Join-Path $PSScriptRoot Invoke-TFS.ps1)
@@ -110,7 +111,7 @@ if(Test-Path (Join-Path $env:USERPROFILE PSUtils-Custom.ps1))
 Set-Alias %p Invoke-ForeachParallel
 Set-Alias vs2010 Set-VS2010
 Set-Alias vs2012 Set-VS2012
-Set-Alias vs2013 Set-VS2013
+Set-Alias waik Set-WAIK
 Set-Alias which Get-FindLocation
 Set-Alias nuget (Join-Path $PSScriptRoot 'NuGet.exe')
 Set-Alias proget (Join-Path $PSScriptRoot 'proget.exe')
@@ -148,7 +149,7 @@ Set-Alias srctool (Join-Path $PSScriptRoot 'dbgtools\srctool.exe')
 Export-ModuleMember -function Invoke-ForeachParallel
 Export-ModuleMember -function Set-VS2010
 Export-ModuleMember -function Set-VS2012
-Export-ModuleMember -function Set-VS2013
+Export-ModuleMember -function Set-WAIK
 Export-ModuleMember -function Write-Prompt
 Export-ModuleMember -function Get-FindLocation
 Export-ModuleMember -function Invoke-TFS
@@ -167,7 +168,7 @@ Export-ModuleMember -function Install-ConEmu
 Export-ModuleMember -alias %p
 Export-ModuleMember -alias vs2010
 Export-ModuleMember -alias vs2012
-Export-ModuleMember -alias vs2013
+Export-ModuleMember -alias waik
 Export-ModuleMember -alias which
 Export-ModuleMember -alias nuget
 Export-ModuleMember -alias proget
