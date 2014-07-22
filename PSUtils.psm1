@@ -117,6 +117,7 @@ if(Test-Path (Join-Path $env:USERPROFILE PSUtils-Custom.ps1))
 Set-Alias %p Invoke-ForeachParallel
 Set-Alias vs2010 Set-VS2010
 Set-Alias vs2012 Set-VS2012
+Set-Alias vs2013 Set-VS2013
 Set-Alias waik Set-WAIK
 Set-Alias which Get-FindLocation
 Set-Alias nuget (Join-Path $PSScriptRoot 'NuGet.exe')
