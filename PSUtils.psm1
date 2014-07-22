@@ -87,6 +87,9 @@ if(Test-Path (Join-Path $env:USERPROFILE PSUtils-Custom.ps1))
     . (Join-Path $env:USERPROFILE PSUtils-Custom.ps1)
 }
 
+## Extenal private PS1 Scripts 
+. (Join-Path $PSScriptRoot Find-Git.ps1)
+
 ## Extenal PS1 Scripts
 . (Join-Path $PSScriptRoot Invoke-ForeachParallel.ps1)
 . (Join-Path $PSScriptRoot Set-VS2010.ps1)
@@ -106,6 +109,7 @@ if(Test-Path (Join-Path $env:USERPROFILE PSUtils-Custom.ps1))
 . (Join-Path $PSScriptRoot Get-Shelveset.ps1)
 . (Join-Path $PSScriptRoot Set-Signature.ps1)
 . (Join-Path $PSScriptRoot Install-ConEmu.ps1)
+. (Join-Path $PSScriptRoot Update-PSUtils.ps1)
 
 # Aliases
 Set-Alias %p Invoke-ForeachParallel
@@ -163,6 +167,7 @@ Export-ModuleMember -function Start-Elevated
 Export-ModuleMember -function Get-Shelveset
 Export-ModuleMember -function Set-Signature
 Export-ModuleMember -function Install-ConEmu
+Export-ModuleMember -function Update-PSUtils
 
 #Export aliases
 Export-ModuleMember -alias %p
