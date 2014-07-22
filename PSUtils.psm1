@@ -110,6 +110,7 @@ if(Test-Path (Join-Path $env:USERPROFILE PSUtils-Custom.ps1))
 . (Join-Path $PSScriptRoot Set-Signature.ps1)
 . (Join-Path $PSScriptRoot Install-ConEmu.ps1)
 . (Join-Path $PSScriptRoot Update-PSUtils.ps1)
+. (Join-Path $PSScriptRoot Update-Path.ps1)
 
 # Aliases
 Set-Alias %p Invoke-ForeachParallel
@@ -168,6 +169,7 @@ Export-ModuleMember -function Get-Shelveset
 Export-ModuleMember -function Set-Signature
 Export-ModuleMember -function Install-ConEmu
 Export-ModuleMember -function Update-PSUtils
+Export-ModuleMember -function Update-Path
 
 #Export aliases
 Export-ModuleMember -alias %p
