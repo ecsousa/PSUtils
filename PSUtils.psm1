@@ -117,6 +117,7 @@ if(Test-Path (Join-Path $env:USERPROFILE PSUtils-Custom.ps1))
 Set-Alias %p Invoke-ForeachParallel
 Set-Alias vs2010 Set-VS2010
 Set-Alias vs2012 Set-VS2012
+Set-Alias vs2013 Set-VS2013
 Set-Alias waik Set-WAIK
 Set-Alias which Get-FindLocation
 Set-Alias nuget (Join-Path $PSScriptRoot 'NuGet.exe')
@@ -155,6 +156,7 @@ Set-Alias srctool (Join-Path $PSScriptRoot 'dbgtools\srctool.exe')
 Export-ModuleMember -function Invoke-ForeachParallel
 Export-ModuleMember -function Set-VS2010
 Export-ModuleMember -function Set-VS2012
+Export-ModuleMember -function Set-VS2013
 Export-ModuleMember -function Set-WAIK
 Export-ModuleMember -function Write-Prompt
 Export-ModuleMember -function Get-FindLocation
@@ -176,6 +178,7 @@ Export-ModuleMember -function Update-Path
 Export-ModuleMember -alias %p
 Export-ModuleMember -alias vs2010
 Export-ModuleMember -alias vs2012
+Export-ModuleMember -alias vs2013
 Export-ModuleMember -alias waik
 Export-ModuleMember -alias which
 Export-ModuleMember -alias nuget
