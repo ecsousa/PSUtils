@@ -20,12 +20,12 @@ function Start-Elevated {
         $cmdLine = [string]::Join(' ', ($args[1..$args.Length] | % { '"' + (([string] $_).Replace('"', '""')) + '"' }) )
     }
 
-$psi = new-object System.Diagnostics.ProcessStartInfo
-$psi.FileName = $program
-$psi.Arguments = $cmdLine
-$psi.Verb = "runas"
+    $psi = new-object System.Diagnostics.ProcessStartInfo
+    $psi.FileName = $program
+    $psi.Arguments = $cmdLine
+    $psi.Verb = "runas"
 
-[System.Diagnostics.Process]::Start($psi)
+    [System.Diagnostics.Process]::Start($psi)
 
 }
 
