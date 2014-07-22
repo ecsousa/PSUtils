@@ -5,7 +5,7 @@ function Update-PSUtils {
         return;
     }
 
-    & $git pull $PSScriptRoot | tee -Variable 'Updated'
+    & $git "--git-dir=$PSScriptRoot\.git" pull | tee -Variable 'Updated'
 
     if($Updated -ne 'Already up-to-date.') {
         $path = $env:PSModulePath.Split(';') | %{ Join-Path $_ 'PSUtils\PSUtils.psm1' } | ? { Test-Path $_ } | Select-Object -First 1
