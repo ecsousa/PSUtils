@@ -5,8 +5,9 @@ function Update-PSUtils {
         return;
     }
 
-    & $git "--git-dir=$PSScriptRoot\.git" pull | tee -Variable 'Updated'
-
+    pushd $PSScriptRoot
+    & $git pull | tee -Variable 'Updated'
+    popd
 
     if($Updated -ne 'Already up-to-date.') {
         Write-Warning "PSUtils has been updated. Realoding PSUtils Globally."
