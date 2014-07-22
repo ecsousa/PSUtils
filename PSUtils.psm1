@@ -89,6 +89,7 @@ if(Test-Path (Join-Path $env:USERPROFILE PSUtils-Custom.ps1))
 
 ## Extenal private PS1 Scripts 
 . (Join-Path $PSScriptRoot Find-Git.ps1)
+. (Join-Path $PSScriptRoot Resolve-VimArgs.ps1)
 
 ## Extenal PS1 Scripts
 . (Join-Path $PSScriptRoot Invoke-ForeachParallel.ps1)

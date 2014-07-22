@@ -17,7 +17,28 @@ function Start-gVim {
 
     Write-Verbose "Start gVim from '$path'"
 
-    $newArgs = & { '-u'; (cvpa (Join-Path $PSScriptRoot _vimrc)); '--cmd'; "set rtp+=$vimfiles"; $args | % {$_} } $args;
+    function Resolve-Args {
+        param($myArgs);
+        
+        if($myArgs.GetType().IsArray) {
+            foreach($arg in $myArgs) {
+                $results = Resolve-Args $arg;
+                if($results.GetType().IsArray) {
+                    foreach($result in $results) {
+                        $result;
+                    }
+                }
+                else {
+                    $results
+                }
+            }
+        }
+        else {
+            $arg;
+        }
+    }
+
+    $newArgs = & { '-u'; (cvpa (Join-Path $PSScriptRoot _vimrc)); '--cmd'; "set rtp+=$vimfiles"; (Resolve-VimArgs $args) | % {$_} } $args;
 
     & ($path) $newArgs
 }
