@@ -1,15 +1,15 @@
 function Update-Path {
 
     $configuredPaths = [string[]] (& {
-            foreach($path in & {
-                (Get-ItemProperty 'HKLM:\System\CurrentControlSet\Control\Session Manager\Environment').Path;
-                (Get-ItemProperty 'HKCU:\Environment').Path;
-                }) {
+        foreach($path in & {
+            (Get-ItemProperty 'HKLM:\System\CurrentControlSet\Control\Session Manager\Environment').Path;
+            (Get-ItemProperty 'HKCU:\Environment').Path;
+        }) {
             if($path) {
-            $path.Split(';');
+                $path.Split(';') | % { if($_) { $_ } }
             }
-            }
-            })
+        }
+    })
 
     $currentPaths = $env:Path.Split(';')
 
