@@ -8,7 +8,7 @@ function Install-ConEmu {
         $choice = $host.UI.PromptForChoice('Overwrite Confirmation', 'ConEmu directory already exists. Want to overwrite it?', $choices, 1)
 
         if($choice -eq 0) {
-            rm -rec -for ..\ConEmu
+            rm -rec -for $path
         }
         else {
             return
@@ -38,7 +38,7 @@ function Install-ConEmu {
         mkdir $path | out-null
     }
 
-    Invoke-WebRequest $link.href -OutFile (Join-Path $PSScriptRoot '..\ConEmu\ConEmu.7z')
+    Invoke-WebRequest $link.href -OutFile (Join-Path $path 'ConEmu.7z')
 
     pushd $path
 
