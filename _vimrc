@@ -34,6 +34,7 @@ autocmd BufNewFile,BufRead *.fsx set ft=fs
 autocmd BufNewFile,BufRead *.wxi set ft=xml
 autocmd BufNewFile,BufRead *.wxs set ft=xml
 
+autocmd BufNewFile,BufRead COMMIT_EDITMSG set enc=utf8
 autocmd BufNewFile,BufRead *.config set tabstop=2 shiftwidth=2 enc=utf8
 autocmd BufNewFile,BufRead *.xml set tabstop=2 shiftwidth=2 enc=utf8
 autocmd BufNewFile,BufRead *.wxi set tabstop=2 shiftwidth=2 enc=utf8
