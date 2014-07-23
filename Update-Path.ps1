@@ -13,12 +13,7 @@ function Update-Path {
 
     $currentPaths = $env:Path.Split(';')
 
-    $keptPaths = [string[]] $currentPaths | ? { -not ($configuredPaths -contains $_) }
     $newPaths = [string[]] $configuredPaths | ? { -not ($currentPaths -contains $_) }
-
-    foreach($path in $keptPaths) {
-        Write-Warning "$path will be kept in PATH."
-    }
 
     foreach($path in $newPaths) {
         Write-Warning "Adding $path will be added to PATH."
