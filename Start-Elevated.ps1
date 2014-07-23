@@ -3,6 +3,7 @@ function Start-Elevated {
 
     if($args.Length -eq 0) {
         Write-Warning "You must provived to program to be executed and its command line arguments"
+        return
     }
 
     $program = $args[0]
