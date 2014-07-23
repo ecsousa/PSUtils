@@ -43,6 +43,19 @@ if(-not(Test-Path ConEmu)) {
         Import-Module .\PSUtils\PSUtils.psm1 -Force
         Install-ConEmu
 
+        if($?) {
+            if($env:PROCESSOR_ARCHITECTURE -eq 'x64') {
+                pushd .\ConEmu
+                & .\ConEmu64
+                popd
+            }
+            else {
+                pushd .\ConEmu
+                & .\ConEmu32
+                popd
+            }
+        }
+
     }
     else {
         Write-Warning "Could not install ConEmu -- PowerShell execution policy is set to Restricted"
@@ -50,13 +63,4 @@ if(-not(Test-Path ConEmu)) {
     }
 }
 
-if($env:PROCESSOR_ARCHITECTURE -eq 'x64') {
-    pushd .\ConEmu
-    & .\ConEmu64
-    popd
-}
-else {
-    pushd .\ConEmu
-    & .\ConEmu32
-    popd
-}
+
