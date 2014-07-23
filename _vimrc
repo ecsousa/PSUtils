@@ -11,7 +11,10 @@ function MyDiff()
   silent execute '!diff -a ' . opt . v:fname_in . ' ' . v:fname_new . ' > ' . v:fname_out
 endfunction
 
-colo torte
+if has("gui_running")
+    colo torte
+endif
+
 set shiftwidth=4 tabstop=4
 syntax on
 set nobackup
