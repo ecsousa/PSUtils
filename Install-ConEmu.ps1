@@ -42,7 +42,7 @@ function Install-ConEmu {
 
     pushd $path
 
-    7z x ConEmu.7z
+    sevenZip x ConEmu.7z
     rm ConEmu.7z
     mv ConEmu.exe ConEmu32.exe
 

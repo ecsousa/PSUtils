@@ -133,7 +133,7 @@ Set-Alias gcb Get-Clipboard
 Set-Alias sudo Start-Elevated
 Set-Alias unshelve Get-Shelveset
 Set-Alias sign Set-Signature
-Set-Alias 7z (Join-Path $PSScriptRoot '7z\7z.exe')
+Set-Alias sevenZip (Join-Path $PSScriptRoot '7z\7z.exe')
 
 # GNU Win32 Aliases
 Set-Alias sed (Join-Path $PSScriptRoot 'GnuWin32\bin\sed.exe')
@@ -206,7 +206,7 @@ Export-ModuleMember -alias tar
 Export-ModuleMember -alias awk
 Export-ModuleMember -alias gawk
 Export-ModuleMember -alias less
-Export-ModuleMember -alias 7z
+Export-ModuleMember -alias sevenZip
 
 # Export dbgtools aliases
 Export-ModuleMember -alias symchk
