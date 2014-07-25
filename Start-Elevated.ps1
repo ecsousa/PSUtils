@@ -12,6 +12,23 @@ if([Diagnostics.Process]::GetCurrentProcess().Modules | ? { ($_.ModuleName -eq '
         }
         else {
 
+            if( ($args[0].ToLower() -eq 'gvim') -or ($args[0].ToLower() -eq 'vim')) {
+
+                if($args[0].ToLower() -eq 'vim') {
+                    $cmd = 'Start-Vim'
+                }
+                else {
+
+                    $cmd = 'Start-gVim'
+                }
+                $newArgs = $args[1..$args.Length];
+                $newArgs = & { '-new_console:a'; $newArgs } 
+
+                & ($cmd) $newArgs
+
+                return;
+            }
+
             $program = $args[0]
 
             $alias = Get-Alias $program -ErrorAction SilentlyContinue
