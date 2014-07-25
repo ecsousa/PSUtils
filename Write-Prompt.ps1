@@ -7,6 +7,9 @@ function Write-Prompt {
  
 	$host.UI.RawUI.WindowTitle = $Global:TitlePrefix + ([regex] '\\\.\.\\[^\\\.>]+').Replace((gl).Path, '\'); #(Get-Location);
 
+    $user = [Security.Principal.WindowsIdentity]::GetCurrent();
+    $admin = (New-Object Security.Principal.WindowsPrincipal $user).IsInRole([Security.Principal.WindowsBuiltinRole]::Administrator)
+
     if($emuHk) {
         if($nestedpromptlevel -ge 1) {
             $ending = '>>>'
@@ -20,11 +23,25 @@ function Write-Prompt {
             [char](27) + "[$code"
         }
 
-        return ( (esc '32;1m') + ((([regex] '\\\.\.\\[^\\\.>]+').Replace((gl).Path, '\'))) + $ending + (esc '0m') )
+        if($admin) {
+            $color = '31;1m';
+        }
+        else {
+            $color = '32;1m';
+        }
+
+        return ( [Environment]::NewLine + (esc $color) + ((([regex] '\\\.\.\\[^\\\.>]+').Replace((gl).Path, '\'))) + $ending + (esc '0m') )
     }
     else {
 
-        Write-Host ([System.Char](10) + $((([regex] '\\\.\.\\[^\\\.>]+').Replace((gl).Path, '\'))) + $(if ($nestedpromptlevel -ge 1) { '>>' }) + '>') -NoNewLine -ForegroundColor Green;
+        if($admin) {
+            $color = 'Red';
+        }
+        else {
+            $color = 'Green';
+        }
+
+        Write-Host ([System.Char](10) + $((([regex] '\\\.\.\\[^\\\.>]+').Replace((gl).Path, '\'))) + $(if ($nestedpromptlevel -ge 1) { '>>' }) + '>') -NoNewLine -ForegroundColor $color;
 
         if($host.Name -like 'StudioShell*') {
             return " ";
