@@ -15,7 +15,12 @@ function Write-Prompt {
             $ending = '>'
         }
 
-        return ( [char](27) + '[32m' + [char](27) + '[1m' + ((([regex] '\\\.\.\\[^\\\.>]+').Replace((gl).Path, '\'))) + $ending + [char](27) + '[0m' )
+        function esc {
+            param([string] $code);
+            [char](27) + "[$code"
+        }
+
+        return ( (esc '32;1m') + ((([regex] '\\\.\.\\[^\\\.>]+').Replace((gl).Path, '\'))) + $ending + (esc '0m') )
     }
     else {
 
