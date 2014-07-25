@@ -94,6 +94,13 @@ if(Test-Path (Join-Path $env:USERPROFILE PSUtils-Custom.ps1))
     . (Join-Path $env:USERPROFILE PSUtils-Custom.ps1)
 }
 
+#New PSUtils tab on ConEmu, if using COnEmuHk
+if($emuHk) {
+    . (Join-Path $PSScriptRoot Start-PSUtils.ps1)
+    Set-Alias PSUtils Start-PSUtils
+    Export-ModuleMember -Function Start-PSUtils -Alias PSUtils
+}
+
 ## Extenal private PS1 Scripts 
 . (Join-Path $PSScriptRoot Find-Git.ps1)
 . (Join-Path $PSScriptRoot Resolve-VimArgs.ps1)
