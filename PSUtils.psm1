@@ -1,4 +1,11 @@
+#Detect ConEmuHk
 
+if([Diagnostics.Process]::GetCurrentProcess().Modules | ? { ($_.ModuleName -eq 'ConEmuHk.dll') -or ($_.ModuleName -eq 'ConEmuHk64.dll') }) {
+    $emuHk = $true;
+}
+else {
+    $emuHk = $false;
+}
 
 #Do mappings
 

@@ -1,5 +1,5 @@
 
-if([Diagnostics.Process]::GetCurrentProcess().Modules | ? { ($_.ModuleName -eq 'ConEmuHk.dll') -or ($_.ModuleName -eq 'ConEmuHk64.dll') }) {
+if($emuHk) {
     #We are inside ConEmu, with ConEmuHk enabled!
 
     function Start-Elevated {
