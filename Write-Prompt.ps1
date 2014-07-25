@@ -7,13 +7,26 @@ function Write-Prompt {
  
 	$host.UI.RawUI.WindowTitle = $Global:TitlePrefix + ([regex] '\\\.\.\\[^\\\.>]+').Replace((gl).Path, '\'); #(Get-Location);
 
-    Write-Host ([System.Char](10) + $((([regex] '\\\.\.\\[^\\\.>]+').Replace((gl).Path, '\'))) + $(if ($nestedpromptlevel -ge 1) { '>>' }) + '>') -NoNewLine -ForegroundColor Green;
+    if($emuHk) {
+        if($nestedpromptlevel -ge 1) {
+            $ending = '>>>'
+        }
+        else {
+            $ending = '>'
+        }
 
-    if($host.Name -like 'StudioShell*') {
-        return " ";
+        return ( [char](27) + '[32m' + [char](27) + '[1m' + ((([regex] '\\\.\.\\[^\\\.>]+').Replace((gl).Path, '\'))) + $ending + [char](27) + '[0m' )
     }
     else {
-        return " `b";
+
+        Write-Host ([System.Char](10) + $((([regex] '\\\.\.\\[^\\\.>]+').Replace((gl).Path, '\'))) + $(if ($nestedpromptlevel -ge 1) { '>>' }) + '>') -NoNewLine -ForegroundColor Green;
+
+        if($host.Name -like 'StudioShell*') {
+            return " ";
+        }
+        else {
+            return " `b";
+        }
     }
 
 
