@@ -126,6 +126,7 @@ if($emuHk) {
 . (Join-Path $PSScriptRoot Set-Signature.ps1)
 . (Join-Path $PSScriptRoot Install-ConEmu.ps1)
 . (Join-Path $PSScriptRoot Install-Sysinternals.ps1)
+. (Join-Path $PSScriptRoot Install-Vim.ps1)
 . (Join-Path $PSScriptRoot Update-PSUtils.ps1)
 . (Join-Path $PSScriptRoot Update-Path.ps1)
 
@@ -195,6 +196,7 @@ Export-ModuleMember -function Start-Elevated
 Export-ModuleMember -function Get-Shelveset
 Export-ModuleMember -function Set-Signature
 Export-ModuleMember -function Install-ConEmu
+Export-ModuleMember -function Install-Vim
 Export-ModuleMember -function Install-Sysinternals
 Export-ModuleMember -function Update-PSUtils
 Export-ModuleMember -function Update-Path
