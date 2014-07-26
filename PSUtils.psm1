@@ -124,6 +124,7 @@ if($emuHk) {
 . (Join-Path $PSScriptRoot Get-Shelveset.ps1)
 . (Join-Path $PSScriptRoot Set-Signature.ps1)
 . (Join-Path $PSScriptRoot Install-ConEmu.ps1)
+. (Join-Path $PSScriptRoot Install-Sysinternals.ps1)
 . (Join-Path $PSScriptRoot Update-PSUtils.ps1)
 . (Join-Path $PSScriptRoot Update-Path.ps1)
 
@@ -166,6 +167,14 @@ Set-Alias symstore (Join-Path $PSScriptRoot 'dbgtools\symstore.exe')
 Set-Alias pdbstr (Join-Path $PSScriptRoot 'dbgtools\pdbstr.exe')
 Set-Alias srctool (Join-Path $PSScriptRoot 'dbgtools\srctool.exe')
 
+# Aliases for sysinternals tools
+if(Test-Path (Join-Path $PSScriptRoot ..\sysinternals)) {
+    foreach($file in (gi (Join-Path $PSScriptRoot ..\sysinternals\*.exe))) {
+        Set-Alias $file.Basename $file
+        Export-ModuleMember -Alias $file.Basename
+    }
+}
+
 # Export scripts
 Export-ModuleMember -function Invoke-ForeachParallel
 Export-ModuleMember -function Set-VS2010
@@ -185,6 +194,7 @@ Export-ModuleMember -function Start-Elevated
 Export-ModuleMember -function Get-Shelveset
 Export-ModuleMember -function Set-Signature
 Export-ModuleMember -function Install-ConEmu
+Export-ModuleMember -function Install-Sysinternals
 Export-ModuleMember -function Update-PSUtils
 Export-ModuleMember -function Update-Path
 
