@@ -77,7 +77,7 @@ $vcDir = ([string[]] ((
     $env:VS100COMNTOOLS) |
     ? { $_} |
     % { Join-Path $_ ..\..\VC } |
-    ? { Test-Path $_}))[0]
+    ? { Test-Path $_})) | select-object -first 1
 
 #VC Tools
 If($vcDir) {
