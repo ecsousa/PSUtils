@@ -24,7 +24,7 @@ function Write-Prompt {
         }
 
         if($admin) {
-            $color = '31;1m';
+            $color = '33;1m';
         }
         else {
             $color = '32;1m';
@@ -35,7 +35,7 @@ function Write-Prompt {
     else {
 
         if($admin) {
-            $color = 'Red';
+            $color = 'Yellow';
         }
         else {
             $color = 'Green';
