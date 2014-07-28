@@ -45,6 +45,17 @@ PowerShell, install ConEmu as described above, and then execute it.
 
 *PS: This will require PowerShell 3.0*
 
+## PSUtils Launcher
+
+If you want an easy way to download PSUtils module, and integrate it with ConEmu, you can just jump
+to [PSUtils Launcher](https://github.com/ecsousa/PSUtilsLauncher/releases/latest). It's a small
+executable (requieres .NET 4.0), which will download PSUtils repository and ConEmu (if not present - ConEmu
+download will requiere PowerShell 3.0).
+
+Also, it will keep PSUtils up to date.
+
+It does not requiere native Git client installed.
+
 ## Bootstrap installing
 
 You can also easily install PSUtils and ConEmu in any given folder by executing the following
