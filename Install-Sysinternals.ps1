@@ -1,7 +1,7 @@
 function Install-Sysinternals {
 
     $url = New-Object Uri('http://download.sysinternals.com/files/SysinternalsSuite.zip')
-    $output = cvpa (Join-Path $PSScriptRoot '..\sysinternals')
+    $output = Join-Path $PSScriptRoot '..\sysinternals'
     $zip = Join-Path $PSScriptRoot '..\sysinternals\sysinternals.zip'
 
     if(Test-Path $output) {
@@ -27,6 +27,7 @@ function Install-Sysinternals {
 
         if($?) {
             rm $zip
+            $output = cvpa $output
             Write-Host "Sysinternals tools unpacked at $output. Reload PSUtils module to get its aliases setted." -ForegroundColor Yellow
         }
     }
