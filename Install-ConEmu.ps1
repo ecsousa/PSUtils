@@ -15,30 +15,11 @@ function Install-ConEmu {
         }
     }
 
-    $conemu = [xml] (Invoke-WebRequest 'https://code.google.com/feeds/p/conemu-maximus5/downloads/basic').Content
-
-    $entry = $conemu.feed.entry | ? {$_.title.Split([System.Environment]::NewLine)[1] -like '*ConEmuPack.*.7z*'}
-
-    if(-not($entry)) 
-    {
-        Write-Warning 'Could not find lastest ConEmu version'
-        return;
-    }
-
-    $link = $entry.link | ? { $_.rel -eq 'direct'}
-
-    if(-not($entry)) 
-    {
-        Write-Warning 'Could not find lastet ConEmu download link on feed'
-        return;
-    }
-
-
     if(-not (Test-Path $path)) {
         mkdir $path | out-null
     }
 
-    Invoke-WebRequest $link.href -OutFile (Join-Path $path 'ConEmu.7z')
+    Invoke-WebRequest 'http://conemu.codeplex.com/downloads/get/880090' -OutFile (Join-Path $path 'ConEmu.7z')
 
     pushd $path
 
