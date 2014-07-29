@@ -1,6 +1,13 @@
-Write-Host PSUtils
-#Detect ConEmuHk
+$host.UI.RawUI.ForegroundColor = 'Gray'
 
+if($host.UI.RawUI.BackgroundColor -ne 'Black') {
+    $host.UI.RawUI.BackgroundColor = 'Black'
+    clear
+}
+
+Write-Host PSUtils
+
+#Detect ConEmuHk
 if([Diagnostics.Process]::GetCurrentProcess().Modules | ? { ($_.ModuleName -eq 'ConEmuHk.dll') -or ($_.ModuleName -eq 'ConEmuHk64.dll') }) {
     $emuHk = $true;
 }
@@ -241,6 +248,28 @@ Export-ModuleMember -alias symstore
 Export-ModuleMember -alias pdbstr
 Export-ModuleMember -alias srctool
 
-$host.UI.RawUI.ForegroundColor = 'Gray'
-$host.UI.RawUI.BackgroundColor = 'Black'
+$msgFile = Join-Path ([Environment]::GetFolderPath('ApplicationData')) 'PSUtils\messages.txt'
+
+if(Test-Path $msgFile) {
+    try {
+        $msg = gc $msgFile
+
+        Write-Host ''
+
+        foreach($line in $msg) {
+
+            if($emuHk) {
+                Write-Host ('  ' + [char](27) + '[33;1m' + $line)
+            }
+            else {
+                Write-Host ('  ' + $line) -ForegroundColor Yellow
+            }
+        }
+    }
+    finally {
+        rm $msgFile
+    }
+    
+}
+
 
