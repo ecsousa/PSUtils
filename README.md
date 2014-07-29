@@ -2,13 +2,11 @@
 
 PSUtils is a PowerShell module containing several utility scripts.
 
-To get a full list of all its command, execute the following command
-after PSUtils is imported into PowerShell:
+Please refer to [PSUtils Wiki](https://github.com/ecsousa/PSUtils/wiki)
+to learn more about its functions.
 
-    (Get-Module PSUtils).ExportedCommands
-
-(PS: you will probably need to execute PowerShell with `-ExecutionPolicy RemoteSigned`
-command line option)
+_(PS: you will probably need to execute PowerShell with `-ExecutionPolicy RemoteSigned`
+command line option)_
 
 ## Import Module
 
