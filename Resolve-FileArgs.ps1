@@ -1,4 +1,4 @@
-function Resolve-VimArgs {
+function Resolve-FileArgs {
 
     param($myArgs);
 
@@ -6,19 +6,19 @@ function Resolve-VimArgs {
 
         if($myArgs.GetType().IsArray) {
             foreach($arg in $myArgs) {
-                $results = Resolve-VimArgs $arg;
+                $results = Resolve-FileArgs $arg;
                 if($results.GetType().IsArray) {
                     foreach($result in $results) {
-                        $result;
+                        Resolve-PSDrive $result;
                     }
                 }
                 else {
-                    $results
+                    Resolve-PSDrive $results
                 }
             }
         }
         else {
-            $arg;
+            Resolve-PSDrive $arg;
         }
     }
 

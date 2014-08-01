@@ -111,7 +111,8 @@ if($emuHk) {
 
 ## Extenal private PS1 Scripts 
 . (Join-Path $PSScriptRoot Find-Git.ps1)
-. (Join-Path $PSScriptRoot Resolve-VimArgs.ps1)
+. (Join-Path $PSScriptRoot Resolve-PSDrive.ps1)
+. (Join-Path $PSScriptRoot Resolve-FileArgs.ps1)
 
 ## Extenal PS1 Scripts
 . (Join-Path $PSScriptRoot Invoke-ForeachParallel.ps1)

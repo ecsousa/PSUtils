@@ -38,7 +38,7 @@ function Start-gVim {
         }
     }
 
-    $newArgs = & { '-u'; (cvpa (Join-Path $PSScriptRoot _vimrc)); '--cmd'; "set rtp+=$vimfiles"; (Resolve-VimArgs $args) | % {$_} } $args;
+    $newArgs = & { '-u'; (cvpa (Join-Path $PSScriptRoot _vimrc)); '--cmd'; "set rtp+=$vimfiles"; (Resolve-FileArgs $args) | % {$_} } $args;
 
     & ($path) $newArgs
 }

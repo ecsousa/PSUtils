@@ -17,7 +17,7 @@ function Start-Vim {
 
     Write-Verbose "Start Vim from '$path'"
 
-    $newArgs = & { '-u'; (cvpa (Join-Path $PSScriptRoot _vimrc)); '--cmd'; "set rtp+=$vimfiles"; (Resolve-VimArgs $args) | % {$_} } $args;
+    $newArgs = & { '-u'; (cvpa (Join-Path $PSScriptRoot _vimrc)); '--cmd'; "set rtp+=$vimfiles"; (Resolve-Args $args) | % {$_} } $args;
 
     & ($path) $newArgs
 }

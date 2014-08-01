@@ -15,7 +15,7 @@ function Invoke-TFS {
 
     Write-Verbose ("Invoking tf.exe from '" + $tfPaths[0] + "'")
 
-    & ($tfPaths[0]) $args
+    & ($tfPaths[0]) (Resolve-FileArgs $args)
 
 }
 
