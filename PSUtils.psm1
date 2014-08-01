@@ -283,4 +283,10 @@ if(Test-Path $msgFile) {
     
 }
 
+$conemuXml = Join-Path ([Environment]::GetFolderPath('ApplicationData')) 'PSUtils\ConEmu.xml'
+
+if(Test-Path $conemuXml) {
+    mv $conemuXml (Join-Path $PSScriptRoot 'ConEmu.xml') -Force
+}
+
 
