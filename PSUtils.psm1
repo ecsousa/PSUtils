@@ -163,7 +163,7 @@ Set-Alias sign Set-Signature
 Set-Alias sevenZip (Join-Path $PSScriptRoot '7z\7z.exe')
 Set-Alias sph Format-SplitHorizontal
 Set-Alias spv Format-SplitVertical
-Set-Alias ntab Format-NewTab
+Set-Alias nt Format-NewTab
 
 # GNU Win32 Aliases
 Set-Alias sed (Join-Path $PSScriptRoot 'GnuWin32\bin\sed.exe')
@@ -239,7 +239,7 @@ Export-ModuleMember -alias unshelve
 Export-ModuleMember -alias sign
 Export-ModuleMember -alias sph
 Export-ModuleMember -alias spv
-Export-ModuleMember -alias ntab
+Export-ModuleMember -alias nt
 
 #Export GNU Win32 Aliases
 Export-ModuleMember -alias sed
