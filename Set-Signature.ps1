@@ -1,25 +1,22 @@
-function Set-Signature {
+function Resolve-PSDrive {
     param(
-            [Parameter(Position=0, Mandatory=$TRUE, ValueFromPipeline=$TRUE)]
-            [IO.FileInfo] $file,
-            [Parameter(Position=1, Mandatory=$FALSE, ValueFromPipeline=$FALSE)]
-            [System.Security.Cryptography.X509Certificates.X509Certificate] $Certificate
-         );
+        [Parameter(Position=0, Mandatory=$FALSE, ValueFromPipeline=$TRUE)]
+        [string] $value
+    );
 
-    begin {
-        if(-not $Certificate) {
-            $Certificate = (dir cert:currentuser\my\ -CodeSigningCert | ? { $_.Extensions } | Select-Object -First 1)
-        }
-
-        if(-not ($Certificate) ) {
-            Write-Warning 'Could not find certificate for signing'
-            return
-        }
-    }
     process {
-        if($Certificate) {
-            Set-AuthenticodeSignature $file -Certificate $Certificate -IncludeChain all -TimestampServer http://timestamp.verisign.com/scripts/timstamp.dll
+
+        $splitted = $value.Split(':');
+
+        if($splitted.Length -eq 2) {
+            $psdrive = Get-PSDrive $splitted[0];
+
+            if($psdrive) {
+                return (Join-Path $psdrive.Root $splitted[1]);
+            }
         }
+
+        return $value;
     }
 }
 

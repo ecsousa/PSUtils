@@ -1,6 +1,6 @@
 
 function Invoke-TFS {
-    $tfPaths = [string[]] ((
+    $tfPaths = @((
         $env:VS120COMNTOOLS,
         $env:VS110COMNTOOLS,
         $env:VS100COMNTOOLS ) |
@@ -15,7 +15,7 @@ function Invoke-TFS {
 
     Write-Verbose ("Invoking tf.exe from '" + $tfPaths[0] + "'")
 
-    & ($tfPaths[0]) (Resolve-FileArgs $args)
+    & ($tfPaths[0]) (Expand-Arguments $args | Resolve-PSDrive)
 
 }
 
