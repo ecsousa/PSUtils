@@ -123,6 +123,7 @@ if($emuHk) {
 . (Join-Path $PSScriptRoot Write-Prompt.ps1)
 . (Join-Path $PSScriptRoot Get-FindLocation.ps1)
 . (Join-Path $PSScriptRoot Invoke-TFS.ps1)
+. (Join-Path $PSScriptRoot Invoke-Git.ps1)
 . (Join-Path $PSScriptRoot Start-gVim.ps1)
 . (Join-Path $PSScriptRoot Start-Vim.ps1)
 . (Join-Path $PSScriptRoot Get-Manual.ps1)
@@ -151,6 +152,7 @@ Set-Alias which Get-FindLocation
 Set-Alias nuget (Join-Path $PSScriptRoot 'NuGet.exe')
 Set-Alias proget (Join-Path $PSScriptRoot 'proget.exe')
 Set-Alias tf Invoke-TFS
+Set-Alias git Invoke-Git
 Set-Alias gvim Start-gVim
 Set-Alias vim Start-Vim
 Set-Alias gman Get-Manual
@@ -200,6 +202,7 @@ Export-ModuleMember -function Set-WAIK
 Export-ModuleMember -function Write-Prompt
 Export-ModuleMember -function Get-FindLocation
 Export-ModuleMember -function Invoke-TFS
+Export-ModuleMember -function Invoke-Git
 Export-ModuleMember -function Start-gVim
 Export-ModuleMember -function Start-Vim
 Export-ModuleMember -function Get-Manual
@@ -228,6 +231,7 @@ Export-ModuleMember -alias which
 Export-ModuleMember -alias nuget
 Export-ModuleMember -alias proget
 Export-ModuleMember -alias tf
+Export-ModuleMember -alias git
 Export-ModuleMember -alias gvim
 Export-ModuleMember -alias vim
 Export-ModuleMember -alias gman
