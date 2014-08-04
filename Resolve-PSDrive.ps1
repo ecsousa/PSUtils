@@ -1,16 +1,22 @@
 function Resolve-PSDrive {
-    param([string] $value);
+    param(
+        [Parameter(Position=0, Mandatory=$FALSE, ValueFromPipeline=$TRUE)]
+        [string] $value
+    );
 
-    $sp = $value.Split(':');
+    process {
 
-    if($sp.Length -eq 2) {
-        $psdrive = Get-PSDrive $sp[0];
+        $splitted = $value.Split(':');
 
-        if($psdrive) {
-            return (Join-Path $psdrive.Root $sp[1]);
+        if($splitted.Length -eq 2) {
+            $psdrive = Get-PSDrive $splitted[0] -ErrorAction SilentlyContinue;;
+
+            if($psdrive) {
+                return (Join-Path $psdrive.Root $splitted[1]);
+            }
         }
-    }
 
-    return $value;
+        return $value;
+    }
 }
 
