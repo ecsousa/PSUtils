@@ -6,7 +6,7 @@ if(Test-Path $file) {
 
     $reg = [regex] '^(\S+)\s+(\S.*)'
 
-    foreach($linha in (gc $file)) { 
+    foreach($linha in & {gc $file; "PSUtils $PSScriptRoot"; } ) { 
         $m = $reg.Match($linha)
 
         if($m.Success) {
