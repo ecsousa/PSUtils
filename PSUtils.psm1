@@ -141,6 +141,7 @@ if($emuHk) {
 . (Join-Path $PSScriptRoot Format-SplitHorizontal.ps1)
 . (Join-Path $PSScriptRoot Format-SplitVertical.ps1)
 . (Join-Path $PSScriptRoot Format-NewTab.ps1)
+. (Join-Path $PSScriptRoot Set-NewLocation.ps1)
 
 # Aliases
 Set-Alias %p Invoke-ForeachParallel
@@ -167,6 +168,7 @@ Set-Alias sevenZip (Join-Path $PSScriptRoot '7z\7z.exe')
 Set-Alias sph Format-SplitHorizontal
 Set-Alias spv Format-SplitVertical
 Set-Alias nt Format-NewTab
+Set-Alias xd Set-NewLocation
 
 # GNU Win32 Aliases
 Set-Alias sed (Join-Path $PSScriptRoot 'GnuWin32\bin\sed.exe')
@@ -220,6 +222,7 @@ Export-ModuleMember -function Update-Path
 Export-ModuleMember -function Format-SplitHorizontal
 Export-ModuleMember -function Format-SplitVertical
 Export-ModuleMember -function Format-NewTab
+Export-ModuleMember -function Set-NewLocation
 
 #Export aliases
 Export-ModuleMember -alias %p
@@ -245,6 +248,7 @@ Export-ModuleMember -alias sign
 Export-ModuleMember -alias sph
 Export-ModuleMember -alias spv
 Export-ModuleMember -alias nt
+Export-ModuleMember -alias xd
 
 #Export GNU Win32 Aliases
 Export-ModuleMember -alias sed
