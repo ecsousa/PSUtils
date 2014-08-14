@@ -25,7 +25,6 @@ function Install-ConEmu {
 
     sevenZip x ConEmu.7z
     rm ConEmu.7z
-    mv ConEmu.exe ConEmu32.exe
 
     cp (Join-Path $PSScriptRoot 'ConEmu.xml') ConEmu.xml
 
