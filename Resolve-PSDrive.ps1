@@ -9,10 +9,12 @@ function Resolve-PSDrive {
         $splitted = $value.Split(':');
 
         if($splitted.Length -eq 2) {
-            $psdrive = Get-PSDrive $splitted[0] -ErrorAction SilentlyContinue;;
+            if($splitted[0]) {
+                $psdrive = Get-PSDrive $splitted[0] -ErrorAction SilentlyContinue;;
 
-            if($psdrive) {
-                return (Join-Path $psdrive.Root $splitted[1]);
+                if($psdrive) {
+                    return (Join-Path $psdrive.Root $splitted[1]);
+                }
             }
         }
 
