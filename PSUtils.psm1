@@ -142,6 +142,7 @@ if($emuHk) {
 . (Join-Path $PSScriptRoot Format-SplitVertical.ps1)
 . (Join-Path $PSScriptRoot Format-NewTab.ps1)
 . (Join-Path $PSScriptRoot Set-NewLocation.ps1)
+. (Join-Path $PSScriptRoot New-Solution.ps1)
 
 # Aliases
 Set-Alias %p Invoke-ForeachParallel
@@ -223,6 +224,7 @@ Export-ModuleMember -function Format-SplitHorizontal
 Export-ModuleMember -function Format-SplitVertical
 Export-ModuleMember -function Format-NewTab
 Export-ModuleMember -function Set-NewLocation
+Export-ModuleMember -function New-Solution
 
 #Export aliases
 Export-ModuleMember -alias %p
