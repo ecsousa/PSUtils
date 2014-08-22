@@ -43,7 +43,7 @@ function New-Solution {
             '.vbproj' { 'F184B08F-C81C-45F6-A57F-5ABD9991F28F' };
             '.fsproj' { 'F2A71F9B-5D33-465A-A702-920D77279786' };
             '.vcxproj' { '8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942' };
-            default { '00000000-0000-0000-0000-000000000000' };
+            default { return };
         }
 
 
