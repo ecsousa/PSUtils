@@ -8,8 +8,8 @@ foreach($linha in & {if(Test-Path($file)) { gc $file; }; "psu $PSScriptRoot"; } 
     $m = $reg.Match($linha)
 
     if($m.Success) {
-        $prefix = $m.Groups[1].Value;
-        $path = $m.Groups[2].Value;
+        $prefix = $m.Groups[1].Value.Trim();
+        $path = $m.Groups[2].Value.Trim();
 
         if($prefix.ToLower() -ne $current.ToLower()) {
 
