@@ -128,8 +128,7 @@ if($emuHk) {
 . (Join-Path $PSScriptRoot Start-Vim.ps1)
 . (Join-Path $PSScriptRoot Get-Manual.ps1)
 . (Join-Path $PSScriptRoot Add-Link.ps1)
-. (Join-Path $PSScriptRoot Set-Clipboard.ps1)
-. (Join-Path $PSScriptRoot Get-Clipboard.ps1)
+. (Join-Path $PSScriptRoot ClipboardFunctions.ps1)
 . (Join-Path $PSScriptRoot Start-Elevated.ps1)
 . (Join-Path $PSScriptRoot Get-Shelveset.ps1)
 . (Join-Path $PSScriptRoot Set-Signature.ps1)
@@ -160,8 +159,8 @@ Set-Alias vim Start-Vim
 Set-Alias gman Get-Manual
 Set-Alias mklink Add-Link
 Set-Alias prompt Write-Prompt
-Set-Alias scb Set-Clipboard
-Set-Alias gcb Get-Clipboard
+Set-Alias scb Set-ClipboardText
+Set-Alias gcb Get-ClipboardText
 Set-Alias sudo Start-Elevated
 Set-Alias unshelve Get-Shelveset
 Set-Alias sign Set-Signature
@@ -210,8 +209,9 @@ Export-ModuleMember -function Start-gVim
 Export-ModuleMember -function Start-Vim
 Export-ModuleMember -function Get-Manual
 Export-ModuleMember -function Add-Link
-Export-ModuleMember -function Set-Clipboard
-Export-ModuleMember -function Get-Clipboard
+Export-ModuleMember -function Set-ClipboardText
+Export-ModuleMember -function Get-ClipboardText
+Export-ModuleMember -function Clear-Clipboard
 Export-ModuleMember -function Start-Elevated
 Export-ModuleMember -function Get-Shelveset
 Export-ModuleMember -function Set-Signature
