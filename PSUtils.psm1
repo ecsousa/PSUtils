@@ -270,6 +270,13 @@ Export-ModuleMember -alias symstore
 Export-ModuleMember -alias pdbstr
 Export-ModuleMember -alias srctool
 
+#Create alias for NuGet.exe if not found on path
+
+if(-not(which NuGet.exe)) {
+    Set-Alias Nuget.exe Nuget
+    Export-ModuleMember -alias Nuget.exe
+}
+
 $msgFile = Join-Path ([Environment]::GetFolderPath('ApplicationData')) 'PSUtils\messages.txt'
 
 if(Test-Path $msgFile) {
