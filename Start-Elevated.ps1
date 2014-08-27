@@ -42,7 +42,7 @@ if($emuHk) {
                 $cmdLine = $cmdLine + [string]::Join(' ', ($args[1..$args.Length] | % { '"' + (([string] $_).Replace('"', '""')) + '"' }) )
             }
 
-            $fullProgram = which InstallUtil | select-object -First 1
+            $fullProgram = which $program | select-object -First 1
 
             if($fullProgram) {
                 $program = $fullProgram
