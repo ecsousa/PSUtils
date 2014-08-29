@@ -141,6 +141,7 @@ if($emuHk) {
 . (Join-Path $PSScriptRoot Format-SplitVertical.ps1)
 . (Join-Path $PSScriptRoot Format-NewTab.ps1)
 . (Join-Path $PSScriptRoot Set-NewLocation.ps1)
+. (Join-Path $PSScriptRoot Get-NewLocation.ps1)
 . (Join-Path $PSScriptRoot New-Solution.ps1)
 
 # Aliases
@@ -169,6 +170,7 @@ Set-Alias sph Format-SplitHorizontal
 Set-Alias spv Format-SplitVertical
 Set-Alias nt Format-NewTab
 Set-Alias xd Set-NewLocation
+Set-Alias gx Get-NewLocation
 
 # GNU Win32 Aliases
 Set-Alias sed (Join-Path $PSScriptRoot 'GnuWin32\bin\sed.exe')
@@ -224,6 +226,7 @@ Export-ModuleMember -function Format-SplitHorizontal
 Export-ModuleMember -function Format-SplitVertical
 Export-ModuleMember -function Format-NewTab
 Export-ModuleMember -function Set-NewLocation
+Export-ModuleMember -function Get-NewLocation
 Export-ModuleMember -function New-Solution
 
 #Export aliases
@@ -251,6 +254,7 @@ Export-ModuleMember -alias sph
 Export-ModuleMember -alias spv
 Export-ModuleMember -alias nt
 Export-ModuleMember -alias xd
+Export-ModuleMember -alias gx
 
 #Export GNU Win32 Aliases
 Export-ModuleMember -alias sed
