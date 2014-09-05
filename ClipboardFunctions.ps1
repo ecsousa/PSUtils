@@ -73,18 +73,25 @@ $unicodeTextFormat = 13
 
 function Set-ClipboardText {
     param([Parameter(ValueFromPipeline=$true)][string]$Value)
-    Use-Clipboard {
-        Clear-Clipboard
-
-        $ptr = [Runtime.InteropServices.Marshal]::StringToHGlobalUni($Value)
-        Assert-Win32CallSuccess -NullIsError {
-            [PowershellPlatformInterop.Clipboard]::SetClipboardData($unicodeTextFormat, $ptr)
+    begin {
+        $textToCopy = $null
+    }
+    process {
+        if($textToCopy -ne $null) {
+            $textToCopy = $textToCopy + [Environment]::NewLine;
         }
 
-        $ptr = [Runtime.InteropServices.Marshal]::StringToHGlobalAnsi($Value)
+        $textToCopy = $textToCopy + $Value;
+    }
+    end {
+        Use-Clipboard {
+            Clear-Clipboard
 
-        Assert-Win32CallSuccess -NullIsError {
-            [PowershellPlatformInterop.Clipboard]::SetClipboardData($ansiTextFormat, $ptr)
+            $ptr = [Runtime.InteropServices.Marshal]::StringToHGlobalUni($textToCopy)
+            Assert-Win32CallSuccess -NullIsError {
+                [PowershellPlatformInterop.Clipboard]::SetClipboardData($unicodeTextFormat, $ptr)
+            }
+
         }
     }
 }
