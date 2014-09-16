@@ -343,7 +343,7 @@
 			<value name="Multi.Modifier" type="dword" data="0000005b"/>
 			<value name="Multi.ArrowsModifier" type="dword" data="0000005b"/>
 			<value name="KeyMacroVersion" type="hex" data="02"/>
-			<value name="MinimizeRestore" type="dword" data="000011c0"/>
+			<value name="MinimizeRestore" type="dword" data="10125bc0"/>
 			<value name="MinimizeRestore2" type="dword" data="00000000"/>
 			<value name="GlobalRestore" type="dword" data="00000000"/>
 			<value name="ForcedFullScreen" type="dword" data="00125b0d"/>

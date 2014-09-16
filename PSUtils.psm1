@@ -126,6 +126,7 @@ if($emuHk) {
 . (Join-Path $PSScriptRoot Invoke-Git.ps1)
 . (Join-Path $PSScriptRoot Start-gVim.ps1)
 . (Join-Path $PSScriptRoot Start-Vim.ps1)
+. (Join-Path $PSScriptRoot Start-SublimeText.ps1)
 . (Join-Path $PSScriptRoot Get-Manual.ps1)
 . (Join-Path $PSScriptRoot Add-Link.ps1)
 . (Join-Path $PSScriptRoot ClipboardFunctions.ps1)
@@ -157,6 +158,7 @@ Set-Alias tf Invoke-TFS
 Set-Alias git Invoke-Git
 Set-Alias gvim Start-gVim
 Set-Alias vim Start-Vim
+Set-Alias st Start-SublimeText
 Set-Alias gman Get-Manual
 Set-Alias mklink Add-Link
 Set-Alias prompt Write-Prompt
@@ -209,6 +211,7 @@ Export-ModuleMember -function Invoke-TFS
 Export-ModuleMember -function Invoke-Git
 Export-ModuleMember -function Start-gVim
 Export-ModuleMember -function Start-Vim
+Export-ModuleMember -function Start-SublimeText
 Export-ModuleMember -function Get-Manual
 Export-ModuleMember -function Add-Link
 Export-ModuleMember -function Set-ClipboardText
@@ -242,6 +245,7 @@ Export-ModuleMember -alias tf
 Export-ModuleMember -alias git
 Export-ModuleMember -alias gvim
 Export-ModuleMember -alias vim
+Export-ModuleMember -alias st
 Export-ModuleMember -alias gman
 Export-ModuleMember -alias mklink
 Export-ModuleMember -alias prompt
