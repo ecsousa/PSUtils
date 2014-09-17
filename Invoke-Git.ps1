@@ -6,6 +6,8 @@ function Invoke-Git {
         if(${Env:ProgramFiles(x86)}) {
             Join-Path ${Env:ProgramFiles(x86)} Git\bin;
         }
+    } | ? {
+        $_
     } | % {
         Join-Path $_ git.exe
     } | ? {

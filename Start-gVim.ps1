@@ -2,6 +2,8 @@ function Start-gVim {
     $paths = & {
         $env:Path.Split(';');
         Join-Path $PSScriptRoot '..\vim'
+    } | ? {
+        $_
     } | % {
         Join-Path $_ gvim.exe
     } | ? {
