@@ -116,7 +116,7 @@ function Get-ClipboardText {
     Use-Clipboard {
         $formats = Get-ClipboardFormats
 
-        if($formats -contains $unicodeTextFormat) {
+        $clip = if($formats -contains $unicodeTextFormat) {
             $ptr = Assert-Win32CallSuccess -PassThru -NullIsError {
                 [PowershellPlatformInterop.Clipboard]::GetClipboardData($unicodeTextFormat)
             }
@@ -133,7 +133,27 @@ function Get-ClipboardText {
                 [Runtime.InteropServices.Marshal]::PtrToStringAnsi($ptr) 
             }
         }
+
+        $current = 0;
+        while($current -ge 0) {
+            $idx = $clip.IndexOf([System.Environment]::NewLine, $current);
+
+            if($idx -eq -1) {
+                $clip.Substring($current);
+                $current = $idx
+            }
+            else {
+                $clip.Substring($current, $idx - $current);
+                $current = $idx + 2
+            }
+
+        }
+
     }
+
+    
 }
+
+
 
 
