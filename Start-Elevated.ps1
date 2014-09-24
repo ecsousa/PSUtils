@@ -42,6 +42,12 @@ if($emuHk) {
                 $cmdLine = $cmdLine + [string]::Join(' ', ($args[1..$args.Length] | % { '"' + (([string] $_).Replace('"', '""')) + '"' }) )
             }
 
+            $fullProgram = which $program | select-object -First 1
+
+            if($fullProgram) {
+                $program = $fullProgram
+            }
+
             $psi = new-object System.Diagnostics.ProcessStartInfo
             $psi.FileName = $program
             $psi.Arguments = $cmdLine

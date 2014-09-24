@@ -111,23 +111,26 @@ if($emuHk) {
 
 ## Extenal private PS1 Scripts 
 . (Join-Path $PSScriptRoot Find-Git.ps1)
-. (Join-Path $PSScriptRoot Resolve-VimArgs.ps1)
+. (Join-Path $PSScriptRoot Resolve-PSDrive.ps1)
+. (Join-Path $PSScriptRoot Expand-Arguments.ps1)
 
 ## Extenal PS1 Scripts
 . (Join-Path $PSScriptRoot Invoke-ForeachParallel.ps1)
 . (Join-Path $PSScriptRoot Set-VS2010.ps1)
 . (Join-Path $PSScriptRoot Set-VS2012.ps1)
 . (Join-Path $PSScriptRoot Set-VS2013.ps1)
+. (Join-Path $PSScriptRoot Set-VS2014.ps1)
 . (Join-Path $PSScriptRoot Set-WAIK.ps1)
 . (Join-Path $PSScriptRoot Write-Prompt.ps1)
 . (Join-Path $PSScriptRoot Get-FindLocation.ps1)
 . (Join-Path $PSScriptRoot Invoke-TFS.ps1)
+. (Join-Path $PSScriptRoot Invoke-Git.ps1)
 . (Join-Path $PSScriptRoot Start-gVim.ps1)
 . (Join-Path $PSScriptRoot Start-Vim.ps1)
+. (Join-Path $PSScriptRoot Start-SublimeText.ps1)
 . (Join-Path $PSScriptRoot Get-Manual.ps1)
 . (Join-Path $PSScriptRoot Add-Link.ps1)
-. (Join-Path $PSScriptRoot Set-Clipboard.ps1)
-. (Join-Path $PSScriptRoot Get-Clipboard.ps1)
+. (Join-Path $PSScriptRoot ClipboardFunctions.ps1)
 . (Join-Path $PSScriptRoot Start-Elevated.ps1)
 . (Join-Path $PSScriptRoot Get-Shelveset.ps1)
 . (Join-Path $PSScriptRoot Set-Signature.ps1)
@@ -136,28 +139,42 @@ if($emuHk) {
 . (Join-Path $PSScriptRoot Install-Vim.ps1)
 . (Join-Path $PSScriptRoot Update-PSUtils.ps1)
 . (Join-Path $PSScriptRoot Update-Path.ps1)
+. (Join-Path $PSScriptRoot Format-SplitHorizontal.ps1)
+. (Join-Path $PSScriptRoot Format-SplitVertical.ps1)
+. (Join-Path $PSScriptRoot Format-NewTab.ps1)
+. (Join-Path $PSScriptRoot Set-NewLocation.ps1)
+. (Join-Path $PSScriptRoot Get-NewLocation.ps1)
+. (Join-Path $PSScriptRoot New-Solution.ps1)
 
 # Aliases
 Set-Alias %p Invoke-ForeachParallel
 Set-Alias vs2010 Set-VS2010
 Set-Alias vs2012 Set-VS2012
 Set-Alias vs2013 Set-VS2013
+Set-Alias vs2014 Set-VS2014
 Set-Alias waik Set-WAIK
 Set-Alias which Get-FindLocation
 Set-Alias nuget (Join-Path $PSScriptRoot 'NuGet.exe')
 Set-Alias proget (Join-Path $PSScriptRoot 'proget.exe')
 Set-Alias tf Invoke-TFS
+Set-Alias git Invoke-Git
 Set-Alias gvim Start-gVim
 Set-Alias vim Start-Vim
+Set-Alias st Start-SublimeText
 Set-Alias gman Get-Manual
 Set-Alias mklink Add-Link
 Set-Alias prompt Write-Prompt
-Set-Alias scb Set-Clipboard
-Set-Alias gcb Get-Clipboard
+Set-Alias scb Set-ClipboardText
+Set-Alias gcb Get-ClipboardText
 Set-Alias sudo Start-Elevated
 Set-Alias unshelve Get-Shelveset
 Set-Alias sign Set-Signature
 Set-Alias sevenZip (Join-Path $PSScriptRoot '7z\7z.exe')
+Set-Alias sph Format-SplitHorizontal
+Set-Alias spv Format-SplitVertical
+Set-Alias nt Format-NewTab
+Set-Alias xd Set-NewLocation
+Set-Alias gx Get-NewLocation
 
 # GNU Win32 Aliases
 Set-Alias sed (Join-Path $PSScriptRoot 'GnuWin32\bin\sed.exe')
@@ -189,16 +206,20 @@ Export-ModuleMember -function Invoke-ForeachParallel
 Export-ModuleMember -function Set-VS2010
 Export-ModuleMember -function Set-VS2012
 Export-ModuleMember -function Set-VS2013
+Export-ModuleMember -function Set-VS2014
 Export-ModuleMember -function Set-WAIK
 Export-ModuleMember -function Write-Prompt
 Export-ModuleMember -function Get-FindLocation
 Export-ModuleMember -function Invoke-TFS
+Export-ModuleMember -function Invoke-Git
 Export-ModuleMember -function Start-gVim
 Export-ModuleMember -function Start-Vim
+Export-ModuleMember -function Start-SublimeText
 Export-ModuleMember -function Get-Manual
 Export-ModuleMember -function Add-Link
-Export-ModuleMember -function Set-Clipboard
-Export-ModuleMember -function Get-Clipboard
+Export-ModuleMember -function Set-ClipboardText
+Export-ModuleMember -function Get-ClipboardText
+Export-ModuleMember -function Clear-Clipboard
 Export-ModuleMember -function Start-Elevated
 Export-ModuleMember -function Get-Shelveset
 Export-ModuleMember -function Set-Signature
@@ -207,19 +228,28 @@ Export-ModuleMember -function Install-Vim
 Export-ModuleMember -function Install-Sysinternals
 Export-ModuleMember -function Update-PSUtils
 Export-ModuleMember -function Update-Path
+Export-ModuleMember -function Format-SplitHorizontal
+Export-ModuleMember -function Format-SplitVertical
+Export-ModuleMember -function Format-NewTab
+Export-ModuleMember -function Set-NewLocation
+Export-ModuleMember -function Get-NewLocation
+Export-ModuleMember -function New-Solution
 
 #Export aliases
 Export-ModuleMember -alias %p
 Export-ModuleMember -alias vs2010
 Export-ModuleMember -alias vs2012
 Export-ModuleMember -alias vs2013
+Export-ModuleMember -alias vs2014
 Export-ModuleMember -alias waik
 Export-ModuleMember -alias which
 Export-ModuleMember -alias nuget
 Export-ModuleMember -alias proget
 Export-ModuleMember -alias tf
+Export-ModuleMember -alias git
 Export-ModuleMember -alias gvim
 Export-ModuleMember -alias vim
+Export-ModuleMember -alias st
 Export-ModuleMember -alias gman
 Export-ModuleMember -alias mklink
 Export-ModuleMember -alias prompt
@@ -228,7 +258,11 @@ Export-ModuleMember -alias gcb
 Export-ModuleMember -alias sudo
 Export-ModuleMember -alias unshelve
 Export-ModuleMember -alias sign
-
+Export-ModuleMember -alias sph
+Export-ModuleMember -alias spv
+Export-ModuleMember -alias nt
+Export-ModuleMember -alias xd
+Export-ModuleMember -alias gx
 
 #Export GNU Win32 Aliases
 Export-ModuleMember -alias sed
@@ -247,6 +281,13 @@ Export-ModuleMember -alias symchk
 Export-ModuleMember -alias symstore
 Export-ModuleMember -alias pdbstr
 Export-ModuleMember -alias srctool
+
+#Create alias for NuGet.exe if not found on path
+
+if(-not(which NuGet.exe)) {
+    Set-Alias Nuget.exe Nuget
+    Export-ModuleMember -alias Nuget.exe
+}
 
 $msgFile = Join-Path ([Environment]::GetFolderPath('ApplicationData')) 'PSUtils\messages.txt'
 

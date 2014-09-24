@@ -1,21 +1,22 @@
 
 function Invoke-TFS {
-    $tfPaths = [string[]] ((
+    $tfPath = @((
         $env:VS120COMNTOOLS,
         $env:VS110COMNTOOLS,
         $env:VS100COMNTOOLS ) |
         ? { $_ } |
         % { Join-Path $_ '..\IDE\tf.exe' } |
-        ? { Test-Path $_ })
+        ? { Test-Path $_ }) |
+        Select-Object -First 1
 
-    if(-not $tfPaths) {
+    if(-not $tfPath) {
         Write-Warning "Could not find tf.exe"
         return
     }
 
-    Write-Verbose ("Invoking tf.exe from '" + $tfPaths[0] + "'")
+    Write-Verbose ("Invoking tf.exe from '" + $tfPath + "'")
 
-    & ($tfPaths[0]) $args
+    & ($tfPath) (Expand-Arguments $args | Resolve-PSDrive)
 
 }
 
