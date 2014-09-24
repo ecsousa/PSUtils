@@ -53,6 +53,7 @@ nmap <TAB>n :tabn<CR>
 nmap <TAB>p :tabp<CR>
 nmap <TAB>f :tabfirst<CR>
 nmap <TAB>l :tablast<CR>
+nmap <TAB>x :tabclose<CR>
 
 source $VIMRUNTIME/delmenu.vim
 set langmenu=none
