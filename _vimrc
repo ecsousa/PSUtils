@@ -48,6 +48,11 @@ nunmap <C-A>
 nunmap <C-Y>
 
 nmap <SPACE> <SPACE>:noh<CR>
+nmap ,t <Esc>:tabnew<CR>
+nmap ,n <Esc>:tabn<CR>
+nmap ,p <Esc>:tabp<CR>
+nmap ,f <Esc>:tabfirst<CR>
+nmap ,l <Esc>:tablast<CR>
 
 source $VIMRUNTIME/delmenu.vim
 set langmenu=none
