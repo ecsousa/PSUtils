@@ -19,9 +19,7 @@ function Start-gVim {
 
     $newArgs = & {
         '-u';
-        cvpa (Join-Path $PSScriptRoot _vimrc);
-        '--cmd';
-        "set rtp+=$(Join-Path $PSScriptRoot vimfiles)";
+        (Join-Path $PSScriptRoot _vimrc);
         Expand-Arguments $args | Resolve-PSDrive;
     } $args;
 

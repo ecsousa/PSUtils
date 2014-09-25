@@ -13,7 +13,6 @@ function Register-Vimrc {
         }
 
         '"" >>>>>>>> PSUtils vim init'
-        "set runtimepath+=$vimRuntime"
         "source $vimInit"
         '"" <<<<<<<< PSUtils vim init'
     }
