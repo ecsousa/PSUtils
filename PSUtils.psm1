@@ -145,6 +145,7 @@ if($emuHk) {
 . (Join-Path $PSScriptRoot Set-NewLocation.ps1)
 . (Join-Path $PSScriptRoot Get-NewLocation.ps1)
 . (Join-Path $PSScriptRoot New-Solution.ps1)
+. (Join-Path $PSScriptRoot Register-Vimrc.ps1)
 
 # Aliases
 Set-Alias %p Invoke-ForeachParallel
@@ -234,6 +235,7 @@ Export-ModuleMember -function Format-NewTab
 Export-ModuleMember -function Set-NewLocation
 Export-ModuleMember -function Get-NewLocation
 Export-ModuleMember -function New-Solution
+Export-ModuleMember -function Register-Vimrc
 
 #Export aliases
 Export-ModuleMember -alias %p
