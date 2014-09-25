@@ -8,6 +8,9 @@ function Register-Vimrc {
         if(Test-Path $vimrc) {
             sed $vimrc -e '/^\"\" >>>>>>>> PSUtils vim init\s*$/,/^\"\" <<<<<<<< PSUtils vim init\s*$/d'
         }
+        else {
+            touch $vimrc
+        }
 
         '"" >>>>>>>> PSUtils vim init'
         "set runtimepath+=$vimRuntime"
