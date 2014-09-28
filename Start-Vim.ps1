@@ -20,11 +20,12 @@ function Start-Vim {
     $newArgs = & {
         '-u';
         cvpa (Join-Path $PSScriptRoot _vimrc);
+        '-c';
+        'colo torte';
         Expand-Arguments $args | Resolve-PSDrive;
     } $args;
 
 
     & @($paths)[0] $newArgs
 }
-
 
