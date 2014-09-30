@@ -5,8 +5,6 @@ if($host.UI.RawUI.BackgroundColor -ne 'Black') {
     clear
 }
 
-Write-Host PSUtils
-
 #Detect ConEmuHk
 if([Diagnostics.Process]::GetCurrentProcess().Modules | ? { ($_.ModuleName -eq 'ConEmuHk.dll') -or ($_.ModuleName -eq 'ConEmuHk64.dll') }) {
     $emuHk = $true;

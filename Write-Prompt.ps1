@@ -30,7 +30,7 @@ function Write-Prompt {
             $color = '32;1m';
         }
 
-        return ( [Environment]::NewLine + (esc $color) + ((([regex] '\\\.\.\\[^\\\.>]+').Replace((gl).Path, '\'))) + $ending + (esc '0m') )
+        return ( [Environment]::NewLine + (esc $color) + ((([regex] '\\\.\.\\[^\\\.>]+').Replace((gl).Path, '\'))) + $ending + (esc '37;2m') )
     }
     else {
 
