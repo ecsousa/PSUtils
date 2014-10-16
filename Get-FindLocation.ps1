@@ -16,8 +16,9 @@ function Get-FindLocation
 
 
     (gc Env:\Path).Split(';') |
-        ? { -not([string]::IsNullOrWhitespace($_)) } |
-        ? {Test-Path (Join-Path $_ "$Searchee.*")} |
+        ? { $_ } |
+        ? { $_.Length -gt 0 } |
+        ? {Test-Path (Join-Path $_ "$Searchee.*") -ErrorAction SilentlyContinue } |
         % { gi (Join-Path $_ "$Searchee.*") } |
         % { $_.FullName }
 }
