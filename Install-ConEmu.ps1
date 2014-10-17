@@ -19,7 +19,7 @@ function Install-ConEmu {
         mkdir $path | out-null
     }
 
-    Invoke-WebRequest 'http://ecsousa.github.io/ConEmuPack.7z' -OutFile (Join-Path $path 'ConEmu.7z')
+    Download-File 'http://ecsousa.github.io/ConEmuPack.7z' -OutFile (Join-Path $path 'ConEmu.7z')
 
     pushd $path
 

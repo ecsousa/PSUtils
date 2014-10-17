@@ -17,7 +17,7 @@ function Install-Sysinternals {
     }
 
     if(-not(Test-Path($zip))) {
-        Invoke-WebRequest $url -OutFile $zip
+        Download-File $url -OutFile $zip
     }
 
     try {

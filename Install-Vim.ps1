@@ -24,7 +24,7 @@ function Install-Vim {
         $zip = Join-Path $output $url.Segments[-1]
 
         if(-not(Test-Path($zip))) {
-            Invoke-WebRequest $url -OutFile $zip
+            Download-File $url -OutFile $zip
         }
     }
 
