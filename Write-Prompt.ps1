@@ -37,7 +37,7 @@ function Write-Prompt {
         }
 
         if($branch) {
-            $ending = " $(esc '36;1m')[$branch]$(esc $color)$ending";
+            $ending = "$(esc '36;1m')@$branch$(esc $color)$ending";
         }
 
         return ( [Environment]::NewLine + (esc $color) + ((([regex] '\\\.\.\\[^\\\.>]+').Replace((gl).Path, '\'))) + $ending + (esc '37;2m') )
