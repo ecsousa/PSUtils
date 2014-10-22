@@ -10,6 +10,12 @@ function Write-Prompt {
     $user = [Security.Principal.WindowsIdentity]::GetCurrent();
     $admin = (New-Object Security.Principal.WindowsPrincipal $user).IsInRole([Security.Principal.WindowsBuiltinRole]::Administrator)
 
+    $branch = $null;
+    
+    if(which git) {
+        $branch = (git branch 2>$null) | %{ ([regex] '\* (.*)').match($_) } | ? { $_.Success } | %{ $_.Groups[1].Value } | Select-Object -First 1
+    }
+
     if($emuHk) {
         if($nestedpromptlevel -ge 1) {
             $ending = '>>>'
@@ -28,6 +34,10 @@ function Write-Prompt {
         }
         else {
             $color = '32;1m';
+        }
+
+        if($branch) {
+            $ending = " $(esc '36;1m')[$branch]$(esc $color)$ending";
         }
 
         return ( [Environment]::NewLine + (esc $color) + ((([regex] '\\\.\.\\[^\\\.>]+').Replace((gl).Path, '\'))) + $ending + (esc '37;2m') )
