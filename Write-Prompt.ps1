@@ -12,7 +12,7 @@ function Write-Prompt {
 
     $branch = $null;
     
-    if(which git) {
+    if((Test-Path '.git') -and (which git)) {
         $branch = (git branch 2>$null) | %{ ([regex] '\* (.*)').match($_) } | ? { $_.Success } | %{ $_.Groups[1].Value } | Select-Object -First 1
     }
 
