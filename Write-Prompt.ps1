@@ -1,5 +1,19 @@
 $Global:TitlePrefix = '[psh] ';
 
+function Test-Git {
+    param([IO.DirectoryInfo] $dir)
+
+    if(Test-Path (Join-Path $dir.FullName '.git')) {
+        return $true;
+    }
+
+    if(($dir.Parent -eq $null) -or ($dir -eq $dir.Parent)) {
+        return $false;
+    }
+
+    return Test-Git ($dir.Parent.FullName)
+}
+
 function Write-Prompt {
     if((gi .).PSProvider.Name -eq 'FileSystem') {
         [system.Environment]::CurrentDirectory = (convert-path ".");
@@ -12,7 +26,7 @@ function Write-Prompt {
 
     $branch = $null;
     
-    if((Test-Path '.git') -and (which git)) {
+    if( (Test-Git (gi .)) -and (which git)) {
         $branch = (git branch 2>$null) | %{ ([regex] '\* (.*)').match($_) } | ? { $_.Success } | %{ $_.Groups[1].Value } | Select-Object -First 1
     }
 
