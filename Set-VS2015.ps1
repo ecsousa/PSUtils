@@ -1,4 +1,4 @@
-function Set-VS2014 {
+function Set-VS2015 {
     if(-not($env:VS140COMNTOOLS)) {
         Write-Warning "Environment variable VS140COMNTOOLS is undefined"
         return;
@@ -20,6 +20,6 @@ function Set-VS2014 {
         Set-Item -path env:$p -value $v
     }
 
-    $Global:TitlePrefix = '[vs2014] ';
+    $Global:TitlePrefix = '[vs2015] ';
 }
 

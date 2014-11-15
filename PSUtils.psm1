@@ -118,7 +118,7 @@ if($emuHk) {
 . (Join-Path $PSScriptRoot Set-VS2010.ps1)
 . (Join-Path $PSScriptRoot Set-VS2012.ps1)
 . (Join-Path $PSScriptRoot Set-VS2013.ps1)
-. (Join-Path $PSScriptRoot Set-VS2014.ps1)
+. (Join-Path $PSScriptRoot Set-VS2015.ps1)
 . (Join-Path $PSScriptRoot Set-WAIK.ps1)
 . (Join-Path $PSScriptRoot Write-Prompt.ps1)
 . (Join-Path $PSScriptRoot Get-FindLocation.ps1)
@@ -151,7 +151,7 @@ Set-Alias %p Invoke-ForeachParallel
 Set-Alias vs2010 Set-VS2010
 Set-Alias vs2012 Set-VS2012
 Set-Alias vs2013 Set-VS2013
-Set-Alias vs2014 Set-VS2014
+Set-Alias vs2015 Set-VS2015
 Set-Alias waik Set-WAIK
 Set-Alias which Get-FindLocation
 Set-Alias nuget (Join-Path $PSScriptRoot 'NuGet.exe')
@@ -206,7 +206,7 @@ Export-ModuleMember -function Invoke-ForeachParallel
 Export-ModuleMember -function Set-VS2010
 Export-ModuleMember -function Set-VS2012
 Export-ModuleMember -function Set-VS2013
-Export-ModuleMember -function Set-VS2014
+Export-ModuleMember -function Set-VS2015
 Export-ModuleMember -function Set-WAIK
 Export-ModuleMember -function Write-Prompt
 Export-ModuleMember -function Get-FindLocation
@@ -241,7 +241,7 @@ Export-ModuleMember -alias %p
 Export-ModuleMember -alias vs2010
 Export-ModuleMember -alias vs2012
 Export-ModuleMember -alias vs2013
-Export-ModuleMember -alias vs2014
+Export-ModuleMember -alias vs2015
 Export-ModuleMember -alias waik
 Export-ModuleMember -alias which
 Export-ModuleMember -alias nuget
