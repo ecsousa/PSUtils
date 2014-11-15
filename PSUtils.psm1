@@ -176,16 +176,16 @@ Set-Alias nt Format-NewTab
 Set-Alias xd Set-NewLocation
 Set-Alias gx Get-NewLocation
 
-# GNU Win32 Aliases
-Set-Alias sed (Join-Path $PSScriptRoot 'GnuWin32\bin\sed.exe')
-Set-Alias gzip (Join-Path $PSScriptRoot 'GnuWin32\bin\gzip.exe')
-Set-Alias gwget (Join-Path $PSScriptRoot 'GnuWin32\bin\wget.exe')
-Set-Alias zip (Join-Path $PSScriptRoot 'GnuWin32\bin\zip.exe')
-Set-Alias unzip (Join-Path $PSScriptRoot 'GnuWin32\bin\unzip.exe')
-Set-Alias tar (Join-Path $PSScriptRoot 'GnuWin32\bin\tar.exe')
-Set-Alias awk (Join-Path $PSScriptRoot 'GnuWin32\bin\awk.exe')
-Set-Alias gawk (Join-Path $PSScriptRoot 'GnuWin32\bin\gawk.exe')
-Set-Alias less (Join-Path $PSScriptRoot 'GnuWin32\bin\less.exe')
+# GNU Win32 Aliases and exports
+foreach($gnu in dir (Join-Path $PSScriptRoot 'GnuWin32\bin\*.exe') | ? { $_.Name -ne '[.exe' }) {
+    $alias = $gnu.BaseName;
+    if(Test-Path "Alias:\$alias") {
+        $alias = "g-$alias";
+    }
+
+    Set-Alias $alias $gnu
+    Export-ModuleMember -alias $alias
+}
 
 # dbgtools aliases
 Set-Alias symchk (Join-Path $PSScriptRoot 'dbgtools\symchk.exe')
@@ -264,18 +264,6 @@ Export-ModuleMember -alias spv
 Export-ModuleMember -alias nt
 Export-ModuleMember -alias xd
 Export-ModuleMember -alias gx
-
-#Export GNU Win32 Aliases
-Export-ModuleMember -alias sed
-Export-ModuleMember -alias gzip
-Export-ModuleMember -alias gwget
-Export-ModuleMember -alias zip
-Export-ModuleMember -alias unzip
-Export-ModuleMember -alias tar
-Export-ModuleMember -alias awk
-Export-ModuleMember -alias gawk
-Export-ModuleMember -alias less
-Export-ModuleMember -alias sevenZip
 
 # Export dbgtools aliases
 Export-ModuleMember -alias symchk
