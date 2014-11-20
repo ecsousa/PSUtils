@@ -179,7 +179,7 @@ Set-Alias gx Get-NewLocation
 # GNU Win32 Aliases and exports
 foreach($gnu in dir (Join-Path $PSScriptRoot 'GnuWin32\bin\*.exe') | ? { $_.Name -ne '[.exe' }) {
     $alias = $gnu.BaseName;
-    if(Test-Path "Alias:\$alias") {
+    if((Test-Path "Function:\$alias") -or (Test-Path "Alias:\$alias")) {
         $alias = "g-$alias";
     }
 
