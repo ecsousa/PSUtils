@@ -26,9 +26,10 @@ function Write-Prompt {
 
     $branch = $null;
     
-    if( (Test-Git (gi .)) -and (which git)) {
+    if( (Test-Git (cvpa .)) -and (which git)) {
         $branch = (git branch 2>$null) | %{ ([regex] '\* (.*)').match($_) } | ? { $_.Success } | %{ $_.Groups[1].Value } | Select-Object -First 1
     }
+
 
     if($emuHk) {
         if($nestedpromptlevel -ge 1) {
