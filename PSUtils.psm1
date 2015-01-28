@@ -108,6 +108,7 @@ if($emuHk) {
 }
 
 ## Extenal private PS1 Scripts 
+. (Join-Path $PSScriptRoot Find-InPath.ps1)
 . (Join-Path $PSScriptRoot Find-Git.ps1)
 . (Join-Path $PSScriptRoot Resolve-PSDrive.ps1)
 . (Join-Path $PSScriptRoot Expand-Arguments.ps1)
@@ -124,6 +125,7 @@ if($emuHk) {
 . (Join-Path $PSScriptRoot Get-FindLocation.ps1)
 . (Join-Path $PSScriptRoot Invoke-TFS.ps1)
 . (Join-Path $PSScriptRoot Invoke-Git.ps1)
+. (Join-Path $PSScriptRoot Invoke-Putty.ps1)
 . (Join-Path $PSScriptRoot Start-gVim.ps1)
 . (Join-Path $PSScriptRoot Start-Vim.ps1)
 . (Join-Path $PSScriptRoot Start-SublimeText.ps1)
@@ -158,6 +160,8 @@ Set-Alias nuget (Join-Path $PSScriptRoot 'NuGet.exe')
 Set-Alias proget (Join-Path $PSScriptRoot 'proget.exe')
 Set-Alias tf Invoke-TFS
 Set-Alias git Invoke-Git
+Set-Alias ssh Invoke-Putty
+Set-Alias ssh Invoke-Putty
 Set-Alias gvim Start-gVim
 Set-Alias vim Start-Vim
 Set-Alias st Start-SublimeText
@@ -212,6 +216,7 @@ Export-ModuleMember -function Write-Prompt
 Export-ModuleMember -function Get-FindLocation
 Export-ModuleMember -function Invoke-TFS
 Export-ModuleMember -function Invoke-Git
+Export-ModuleMember -function Invoke-Putty
 Export-ModuleMember -function Start-gVim
 Export-ModuleMember -function Start-Vim
 Export-ModuleMember -function Start-SublimeText
@@ -248,6 +253,7 @@ Export-ModuleMember -alias nuget
 Export-ModuleMember -alias proget
 Export-ModuleMember -alias tf
 Export-ModuleMember -alias git
+Export-ModuleMember -alias ssh
 Export-ModuleMember -alias gvim
 Export-ModuleMember -alias vim
 Export-ModuleMember -alias st
