@@ -8,5 +8,8 @@ Plugin 'godlygeek/csapprox'
 Plugin 'kongo2002/fsharp-vim'
 Plugin 'kennethzfeng/vim-raml'
 Plugin 'tpope/vim-dispatch'
-Plugin 'OmniSharp/omnisharp-vim'
+
+if (has('python'))
+    Plugin 'OmniSharp/omnisharp-vim'
+endif
 

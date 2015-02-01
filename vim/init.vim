@@ -12,6 +12,15 @@ let g:bundle_dir = expand('<sfile>:h') . '/plugins'
 let s:portable = expand('<sfile>:h') . '/vundle.vim'
 execute 'source' s:portable
 call vundle#end()
+"End Vundle
+
+"Check OmniSharp load needed
+let s:portable = expand('<sfile>:h') . '/plugins/omnisharp-vim/server/OmniSharp/bin/Debug/OmniSharp.exe'
+if filereadable(s:portable) && has('python')
+    let s:portable = expand('<sfile>:h') . '/OmniSharp.vim'
+    execute 'source' s:portable
+endif
+
 
 filetype plugin indent on
 
