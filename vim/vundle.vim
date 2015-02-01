@@ -1,4 +1,12 @@
-call vundle#begin()
+Plugin 'gmarik/Vundle.vim'
+Plugin 'scrooloose/nerdtree'
+Plugin 'tmhedberg/matchit'
+Plugin 'kien/ctrlp.vim'
+Plugin 'scrooloose/nerdcommenter'
+Plugin 'scrooloose/syntastic'
+Plugin 'godlygeek/csapprox'
+Plugin 'kongo2002/fsharp-vim'
+Plugin 'kennethzfeng/vim-raml'
+Plugin 'tpope/vim-dispatch'
+Plugin 'OmniSharp/omnisharp-vim'
 
-call vundle#end()
-filetype plugin indent on

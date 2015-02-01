@@ -2,14 +2,16 @@
 set nocompatible
 filetype off
 
-let s:portable = expand('<sfile>:h') . '/bundle/Vundle.vim'
+"Set Vundle at runtimepath
+let s:portable = expand('<sfile>:h') . '/plugins/Vundle.vim'
 execute ('set rtp+=' . s:portable)
 
+"Load Vundle
+call vundle#begin()
+let g:bundle_dir = expand('<sfile>:h') . '/plugins'
 let s:portable = expand('<sfile>:h') . '/vundle.vim'
 execute 'source' s:portable
-
-" load pathogen 
-silent! execute pathogen#infect()
+call vundle#end()
 
 filetype plugin indent on
 
