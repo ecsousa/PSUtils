@@ -1,4 +1,4 @@
-Plugin 'gmarik/Vundle.vim'
+Plugin 'ecsousa/Vundle.vim'
 Plugin 'scrooloose/nerdtree'
 Plugin 'tmhedberg/matchit'
 Plugin 'kien/ctrlp.vim'
