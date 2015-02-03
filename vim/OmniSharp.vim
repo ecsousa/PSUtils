@@ -70,6 +70,7 @@ augroup omnisharp_commands
     autocmd FileType cs nnoremap <leader>dc :OmniSharpDocumentation<cr>
     autocmd FileType cs nnoremap <C-K> :OmniSharpNavigateUp<cr> "navigate up by method/property/field
     autocmd FileType cs nnoremap <C-J> :OmniSharpNavigateDown<cr> "navigate down by method/property/field
+    autocmd FileType cs set cmdheight=2
 
 augroup END
 
@@ -77,7 +78,6 @@ augroup END
 " this setting controls how long to wait (in ms) before fetching type / symbol information.
 set updatetime=500
 " Remove 'Press Enter to continue' message when type information is longer than one line.
-set cmdheight=2
 
 " Contextual code actions (requires CtrlP)
 nnoremap <leader><space> :OmniSharpGetCodeActions<cr>
