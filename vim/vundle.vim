@@ -9,6 +9,7 @@ Plugin 'kongo2002/fsharp-vim'
 Plugin 'kennethzfeng/vim-raml'
 Plugin 'tpope/vim-dispatch'
 Plugin 'bling/vim-airline'
+Plugin 'PProvost/vim-ps1'
 
 set laststatus=2
 
