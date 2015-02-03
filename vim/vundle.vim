@@ -8,6 +8,9 @@ Plugin 'godlygeek/csapprox'
 Plugin 'kongo2002/fsharp-vim'
 Plugin 'kennethzfeng/vim-raml'
 Plugin 'tpope/vim-dispatch'
+Plugin 'bling/vim-airline'
+
+set laststatus=2
 
 if (has('python'))
     Plugin 'OmniSharp/omnisharp-vim'
