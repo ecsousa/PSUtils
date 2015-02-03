@@ -107,7 +107,7 @@ if($emuHk) {
     Export-ModuleMember -Function Start-PSUtils -Alias PSUtils
 }
 
-## Extenal private PS1 Scripts 
+## Extenal private PS1 Scripts
 . (Join-Path $PSScriptRoot Find-InPath.ps1)
 . (Join-Path $PSScriptRoot Find-Git.ps1)
 . (Join-Path $PSScriptRoot Resolve-PSDrive.ps1)
@@ -305,7 +305,7 @@ if(Test-Path $msgFile) {
     finally {
         rm $msgFile
     }
-    
+
 }
 
 
