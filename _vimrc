@@ -29,12 +29,7 @@ function MyDiff()
 endfunction
 
 let s:myPath = expand('<sfile>:h')
-let s:myPath = printf('%s\vim\init.vim', s:myPath)
+let s:myPath = printf('%s\vim\vimrc', s:myPath)
 
 execute 'source' s:myPath 
-
-"let s:myPath = expand('<sfile>:h')
-"let s:myPath = printf('%s\vim\OmniSharp.vim', s:myPath)
-
-"execute 'source' s:myPath 
 
