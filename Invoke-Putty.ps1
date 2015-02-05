@@ -13,7 +13,7 @@ function Invoke-Putty {
     $parms = @(& {
             
         if($emuHk) {
-            nt;
+            #nt;
         }
 
         if($parms) {
