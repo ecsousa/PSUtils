@@ -19,7 +19,7 @@ function Start-gVim {
 
     $newArgs = & {
         '-u';
-        (Join-Path $PSScriptRoot _vimrc);
+        (Join-Path $PSScriptRoot vim\vimrc);
         Expand-Arguments $args | Resolve-PSDrive;
     } $args;
 

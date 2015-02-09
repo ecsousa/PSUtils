@@ -3,7 +3,7 @@ function Register-Vimrc {
 
     $newContent = & {
         $vimRuntime = Join-Path $PSScriptRoot vim
-        $localRc = Join-Path $PSScriptRoot _vimrc
+        $localRc = Join-Path $PSScriptRoot vim\vimrc
 
         if(Test-Path $vimrc) {
             sed $vimrc -e '/^\"\" >>>>>>>> PSUtils vim init\s*$/,/^\"\" <<<<<<<< PSUtils vim init\s*$/d'
