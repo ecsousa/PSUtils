@@ -32,6 +32,8 @@ function Write-Prompt {
 
 
     if($emuHk) {
+        $begining = ''
+
         if($nestedpromptlevel -ge 1) {
             $ending = '>>>'
         }
@@ -52,10 +54,10 @@ function Write-Prompt {
         }
 
         if($branch) {
-            $ending = "$(esc '36;1m')@$branch$(esc $color)$ending";
+            $begining = "$(esc '36;1m')($branch) $begining";
         }
 
-        return ( [Environment]::NewLine + (esc $color) + ((([regex] '\\\.\.\\[^\\\.>]+').Replace((gl).Path, '\'))) + $ending + (esc '37;2m') )
+        return ( [Environment]::NewLine + $begining + (esc $color) + ((([regex] '\\\.\.\\[^\\\.>]+').Replace((gl).Path, '\'))) + $ending + (esc '37;2m') )
     }
     else {
 
