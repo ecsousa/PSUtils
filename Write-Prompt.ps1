@@ -53,11 +53,16 @@ function Write-Prompt {
             $color = '32;1m';
         }
 
-        if($branch) {
-            $begining = "$(esc '36;1m')($branch) $begining";
+        if($host.UI.RawUI.CursorPosition.ToString() -ne '0,0')
+        {
+            $begining = $begining + [Environment]::NewLine;
         }
 
-        return ( [Environment]::NewLine + $begining + (esc $color) + ((([regex] '\\\.\.\\[^\\\.>]+').Replace((gl).Path, '\'))) + $ending + (esc '37;2m') )
+        if($branch) {
+            $begining = $begining + "$(esc '36;1m')($branch) ";
+        }
+
+        return ( $begining + (esc $color) + ((([regex] '\\\.\.\\[^\\\.>]+').Replace((gl).Path, '\'))) + $ending + (esc '37;2m') )
     }
     else {
 
