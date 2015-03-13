@@ -15,7 +15,9 @@ function Test-Git {
 }
 
 function Write-Prompt {
-    if((gi .).PSProvider.Name -eq 'FileSystem') {
+    $isFS = (gi .).PSProvider.Name -eq 'FileSystem';
+
+    if($isFS) {
         [system.Environment]::CurrentDirectory = (convert-path ".");
     }
  
@@ -26,7 +28,7 @@ function Write-Prompt {
 
     $branch = $null;
     
-    if( (Test-Git (cvpa .)) -and (which git)) {
+    if( $isFS -and (Test-Git (cvpa .)) -and (which git)) {
         $branch = (git branch 2>$null) | %{ ([regex] '\* (.*)').match($_) } | ? { $_.Success } | %{ $_.Groups[1].Value } | Select-Object -First 1
     }
 
@@ -34,12 +36,7 @@ function Write-Prompt {
     if($emuHk) {
         $begining = ''
 
-        if($nestedpromptlevel -ge 1) {
-            $ending = '>>>'
-        }
-        else {
-            $ending = '>'
-        }
+        $ending = '>' * ($nestedPromptLevel + 1)
 
         function esc {
             param([string] $code);
@@ -62,7 +59,7 @@ function Write-Prompt {
             $begining = $begining + "$(esc '36;1m')($branch) ";
         }
 
-        return ( $begining + (esc $color) + ((([regex] '\\\.\.\\[^\\\.>]+').Replace((gl).Path, '\'))) + $ending + (esc '37;2m') )
+        return ( $begining + (esc $color) + $executionContext.SessionState.Path.CurrentLocation + $ending + (esc '37;2m') )
     }
     else {
 
@@ -73,7 +70,14 @@ function Write-Prompt {
             $color = 'Green';
         }
 
-        Write-Host ([System.Char](10) + $((([regex] '\\\.\.\\[^\\\.>]+').Replace((gl).Path, '\'))) + $(if ($nestedpromptlevel -ge 1) { '>>' }) + '>') -NoNewLine -ForegroundColor $color;
+        Write-Host ([System.Char](10)) -NoNewLine;
+
+        if($branch) {
+            Write-Host "($branch) " -NoNewLine -ForegroundColor Cyan
+        }
+
+        Write-Host $executionContext.SessionState.Path.CurrentLocation -NoNewLine -ForegroundColor $color;
+        Write-Host ('>' * ($nestedPromptLevel + 1)) -NoNewLine -ForegroundColor $color;
 
         if($host.Name -like 'StudioShell*') {
             return " ";
