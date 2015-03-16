@@ -56,7 +56,7 @@ function Write-Prompt {
         }
 
         if($branch) {
-            $begining = $begining + "$(esc '36;1m')($branch) ";
+            $begining = $begining + "$(esc '33;1m')[$(esc '36;1m')$branch$(esc '33;1m')] ";
         }
 
         return ( $begining + (esc $color) + $executionContext.SessionState.Path.CurrentLocation + $ending + (esc '37;2m') )
@@ -73,7 +73,9 @@ function Write-Prompt {
         Write-Host ([System.Char](10)) -NoNewLine;
 
         if($branch) {
-            Write-Host "($branch) " -NoNewLine -ForegroundColor Cyan
+            Write-Host "[" -NoNewLine -ForegroundColor Yellow
+            Write-Host "$branch" -NoNewLine -ForegroundColor Cyan
+            Write-Host "] " -NoNewLine -ForegroundColor Yellow
         }
 
         Write-Host $executionContext.SessionState.Path.CurrentLocation -NoNewLine -ForegroundColor $color;
