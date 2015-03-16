@@ -33,7 +33,7 @@ function Write-Prompt {
     }
 
 
-    if($emuHk) {
+    if(Test-Ansi) {
         $begining = ''
 
         $ending = '>' * ($nestedPromptLevel + 1)

@@ -147,6 +147,7 @@ if($emuHk) {
 . (Join-Path $PSScriptRoot Get-NewLocation.ps1)
 . (Join-Path $PSScriptRoot New-Solution.ps1)
 . (Join-Path $PSScriptRoot Register-Vimrc.ps1)
+. (Join-Path $PSScriptRoot Test-Ansi.ps1)
 
 # Aliases
 Set-Alias %p Invoke-ForeachParallel
