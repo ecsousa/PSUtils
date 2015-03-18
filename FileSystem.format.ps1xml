@@ -1,17 +1,17 @@
-<?xml version="1.0" encoding="utf-8" ?>g
+<?xml version="1.0" encoding="utf-8" ?>
 <!-- *******************************************************************
-These sample files contain formatting information used by the Windowsg
-PowerShell engine. Do not edit or change the contents of this fileg
-directly. Please see the Windows PowerShell documentation or typeg
+These sample files contain formatting information used by the Windows
+PowerShell engine. Do not edit or change the contents of this file
+directly. Please see the Windows PowerShell documentation or type
 Get-Help Update-FormatData for more information.
 
 Copyright (c) Microsoft Corporation.  All rights reserved.
-g
-THIS SAMPLE CODE AND INFORMATION IS PROVIDED "AS IS" WITHOUT WARRANTYg
-OF ANY KIND,WHETHER EXPRESSED OR IMPLIED, INCLUDING BUT NOT LIMITED TOg
+
+THIS SAMPLE CODE AND INFORMATION IS PROVIDED "AS IS" WITHOUT WARRANTY
+OF ANY KIND,WHETHER EXPRESSED OR IMPLIED, INCLUDING BUT NOT LIMITED TO
 THE IMPLIED WARRANTIES OF MERCHANTABILITY AND/OR FITNESS FOR A PARTICULAR
 PURPOSE. IF THIS CODE AND INFORMATION IS MODIFIED, THE ENTIRE RISK OF USE
-OR RESULTS IN CONNECTION WITH THE USE OF THIS CODE AND INFORMATIONg
+OR RESULTS IN CONNECTION WITH THE USE OF THIS CODE AND INFORMATION
 REMAINS WITH THE USER.
 ******************************************************************** -->
 <Configuration>
@@ -39,11 +39,11 @@ REMAINS WITH THE USER.
                                             <Text AssemblyName="System.Management.Automation" BaseName="FileSystemProviderStrings" ResourceId="DirectoryDisplayGrouping"/>
                                             <ExpressionBinding>
                                               <ScriptBlock>
-                                                  $_.PSParentPath.Replace("Microsoft.PowerShell.Core\FileSystem::", "")g
+                                                  $_.PSParentPath.Replace("Microsoft.PowerShell.Core\FileSystem::", "")
                                               </ScriptBlock>
                                             </ExpressionBinding>
                                             <NewLine/>
-                                        </CustomItem>g
+                                        </CustomItem>
                                     </Frame>
                                 </CustomItem>
                             </CustomEntry>
@@ -51,7 +51,7 @@ REMAINS WITH THE USER.
             </CustomControl>
         </Control>
     </Controls>
-g
+
     <!-- ################ VIEW DEFINITIONS ################ -->
 
     <ViewDefinitions>
@@ -61,8 +61,8 @@ g
                 <SelectionSetName>FileSystemTypes</SelectionSetName>
             </ViewSelectedBy>
             <GroupBy>
-                <PropertyName>PSParentPath</PropertyName>g
-                <CustomControlName>FileSystemTypes-GroupingFormat</CustomControlName>g
+                <PropertyName>PSParentPath</PropertyName>
+                <CustomControlName>FileSystemTypes-GroupingFormat</CustomControlName>
             </GroupBy>
             <TableControl>
                 <TableHeaders>
@@ -129,8 +129,8 @@ g
                 <SelectionSetName>FileSystemTypes</SelectionSetName>
             </ViewSelectedBy>
             <GroupBy>
-                <PropertyName>PSParentPath</PropertyName>g
-                <CustomControlName>FileSystemTypes-GroupingFormat</CustomControlName>g
+                <PropertyName>PSParentPath</PropertyName>
+                <CustomControlName>FileSystemTypes-GroupingFormat</CustomControlName>
             </GroupBy>
             <ListControl>
                 <ListEntries>
@@ -185,8 +185,8 @@ g
                 <SelectionSetName>FileSystemTypes</SelectionSetName>
             </ViewSelectedBy>
             <GroupBy>
-                <PropertyName>PSParentPath</PropertyName>g
-                <CustomControlName>FileSystemTypes-GroupingFormat</CustomControlName>g
+                <PropertyName>PSParentPath</PropertyName>
+                <CustomControlName>FileSystemTypes-GroupingFormat</CustomControlName>
             </GroupBy>
             <WideControl>
                 <WideEntries>
@@ -213,8 +213,8 @@ g
                 <TypeName>System.Security.AccessControl.FileSystemSecurity</TypeName>
             </ViewSelectedBy>
             <GroupBy>
-                <PropertyName>PSParentPath</PropertyName>g
-                <CustomControlName>FileSystemTypes-GroupingFormat</CustomControlName>g
+                <PropertyName>PSParentPath</PropertyName>
+                <CustomControlName>FileSystemTypes-GroupingFormat</CustomControlName>
             </GroupBy>
             <TableControl>
                 <TableHeaders>
@@ -253,7 +253,7 @@ g
                 <TypeName>Microsoft.PowerShell.Commands.AlternateStreamData</TypeName>
             </ViewSelectedBy>
             <GroupBy>
-                <PropertyName>Filename</PropertyName>g
+                <PropertyName>Filename</PropertyName>
             </GroupBy>
             <TableControl>
                 <TableHeaders>
@@ -279,6 +279,6 @@ g
                     </TableRowEntry>
                 </TableRowEntries>
             </TableControl>
-        </View>g
+        </View>
     </ViewDefinitions>
 </Configuration>
