@@ -83,7 +83,6 @@ REMAINS WITH THE USER.
                     </TableColumnHeader>
                     <TableColumnHeader>
                         <Label>Name</Label>
-                        <Width>40</Width>
                         <Alignment>Left</Alignment>
                     </TableColumnHeader>
                 </TableHeaders>
