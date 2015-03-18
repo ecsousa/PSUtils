@@ -20,6 +20,5 @@ function Set-VS2013 {
         Set-Item -path env:$p -value $v
     }
 
-    $Global:TitlePrefix = '[vs2013] ';
 }
 

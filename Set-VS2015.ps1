@@ -20,6 +20,5 @@ function Set-VS2015 {
         Set-Item -path env:$p -value $v
     }
 
-    $Global:TitlePrefix = '[vs2015] ';
 }
 

@@ -1,5 +1,3 @@
-$Global:TitlePrefix = '[psh] ';
-
 function Test-Git {
     param([IO.DirectoryInfo] $dir)
 
@@ -20,18 +18,24 @@ function Write-Prompt {
     if($isFS) {
         [system.Environment]::CurrentDirectory = (convert-path ".");
     }
- 
-	$host.UI.RawUI.WindowTitle = $Global:TitlePrefix + ([regex] '\\\.\.\\[^\\\.>]+').Replace((gl).Path, '\'); #(Get-Location);
+
 
     $user = [Security.Principal.WindowsIdentity]::GetCurrent();
     $admin = (New-Object Security.Principal.WindowsPrincipal $user).IsInRole([Security.Principal.WindowsBuiltinRole]::Administrator)
 
     $branch = $null;
-    
+
     if( $isFS -and (Test-Git (cvpa .)) -and (which git)) {
         $branch = (git branch 2>$null) | %{ ([regex] '\* (.*)').match($_) } | ? { $_.Success } | %{ $_.Groups[1].Value } | Select-Object -First 1
     }
 
+    $title = $executionContext.SessionState.Path.CurrentLocation
+
+    if($branch) {
+        $title = "[$branch] $title";
+    }
+
+    $host.UI.RawUI.WindowTitle = $title
 
     if(Test-Ansi) {
         $begining = ''
