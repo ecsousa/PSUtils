@@ -309,4 +309,6 @@ if(Test-Path $msgFile) {
 
 }
 
-
+if(Test-Ansi) {
+    Update-FormatData -Prepend (Join-Path $PSScriptRoot FileSystem.format.ps1xml)
+}
