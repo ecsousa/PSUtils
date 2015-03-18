@@ -24,6 +24,9 @@ function Start-Vim {
     } $args;
 
 
+    $currentPos = [Console]::CursorTop
     & @($paths)[0] $newArgs
+
+    [Console]::SetCursorPosition(0, $currentPos)
 }
 
