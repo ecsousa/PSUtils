@@ -13,6 +13,10 @@ function Test-Git {
 }
 
 function Write-Prompt {
+    if($global:FSFormatDefaultColor) {
+        [Console]::ForegroundColor = $global:FSFormatDefaultColor
+    }
+
     $isFS = (gi .).PSProvider.Name -eq 'FileSystem';
 
     if($isFS) {
