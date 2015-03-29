@@ -309,5 +309,12 @@ if(Test-Path $msgFile) {
 
 }
 
-Update-FormatData -Prepend (Join-Path $PSScriptRoot CustomPSUtils.format.ps1xml)
+if(Test-Ansi) {
+    . (Join-Path $PSScriptRoot Out-FilePSUtils)
+    Set-Alias Out-File Out-FilePSUtils
+
+    Export-ModuleMember -function Out-FilePSUtils
+    Export-ModuleMember -alias Out-File
+    Update-FormatData -Prepend (Join-Path $PSScriptRoot CustomPSUtils.format.ps1xml)
+}
 

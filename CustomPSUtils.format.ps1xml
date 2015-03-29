@@ -10,33 +10,6 @@
     </SelectionSet>
   </SelectionSets>
 
-  <Controls>
-    <Control>
-      <Name>FileSystemTypes-GroupingFormat</Name>
-      <CustomControl>
-        <CustomEntries>
-          <CustomEntry>
-            <CustomItem>
-              <Frame>
-                <LeftIndent>4</LeftIndent>
-                <CustomItem>
-                  <Text AssemblyName="System.Management.Automation" BaseName="FileSystemProviderStrings" ResourceId="DirectoryDisplayGrouping"/>
-                  <ExpressionBinding>
-                    <ScriptBlock>
-                      $global:FSFormatCursorTop = [Console]::CursorTop
-                      [Console]::ForegroundColor = $global:FSFormatDefaultColor 
-                      $_.PSParentPath.Replace("Microsoft.PowerShell.Core\FileSystem::", "")
-                    </ScriptBlock>
-                  </ExpressionBinding>
-                  <NewLine/>
-                </CustomItem>
-              </Frame>
-            </CustomItem>
-          </CustomEntry>
-        </CustomEntries>
-      </CustomControl>
-    </Control>
-  </Controls>
   <ViewDefinitions>
     <View>
       <Name>children</Name>
@@ -44,12 +17,7 @@
         <SelectionSetName>FileSystemTypes</SelectionSetName>
       </ViewSelectedBy>
       <GroupBy>
-        <ScriptBlock>
-          if(-not($global:FSFormatDefaultColor)) {
-            $global:FSFormatDefaultColor = [Console]::ForegroundColor
-          }
-          $_.PSParentPath
-        </ScriptBlock>
+        <PropertyName>PSParentPath</PropertyName>
         <CustomControlName>FileSystemTypes-GroupingFormat</CustomControlName>
       </GroupBy>
       <TableControl>
@@ -91,50 +59,40 @@
               </TableColumnItem>
               <TableColumnItem>
                 <ScriptBlock>
-                  $name = $_.Name
+                    $name = $_.Name
 
-                  if($global:FSFormatCursorTop -ne [Console]::CursorTop)
-                  {
-                    $regexOptions = ([System.Text.RegularExpressions.RegexOptions]::IgnoreCase)
 
-                    $executables = @('exe', 'bat', 'cmd', 'py', 'pl', 'ps1', 'psm1', 'vbs', 'rb', 'reg', 'fsx')
-                    $compresseds = @('zip', 'tar', 'gz', '[rjw]ar', 'arj', 'tgz', 'gz')
-                    $texts = @('txt', 'cfg', 'conf', 'ini', 'csv', 'log', 'xml', 'java', 'c(pp)?', 'fs', 'html?')
+                    if(-not($global:SuppresPSUtilsColoring)) {
+                        $regexOptions = ([System.Text.RegularExpressions.RegexOptions]::IgnoreCase)
 
-                    $executableRegex = New-Object regex("\.($([string]::Join('|', $executables)))`$", $regexOptions)
-                    $compressedRegex = New-Object regex("\.($([string]::Join('|', $compresseds)))`$", $regexOptions)
-                    $textRegex = New-Object regex("\.($([string]::Join('|', $texts)))`$", $regexOptions)
+                        $executables = @('exe', 'bat', 'cmd', 'py', 'pl', 'ps1', 'psm1', 'vbs', 'rb', 'reg', 'fsx')
+                        $compresseds = @('zip', 'tar', 'gz', '[rjw]ar', 'arj', 'tgz', 'gz')
+                        $texts = @('txt', 'cfg', 'conf', 'ini', 'csv', 'log', 'xml', 'java', 'c(pp)?', 'fs', 'html?')
 
-                    $directoryColor = 'Blue'
-                    $executableColor = 'Green'
-                    $compressedColor = 'Red'
-                    $textColor = 'Yellow'
-                    $defaultColor = $global:FSFormatDefaultColor
+                        $executableRegex = New-Object regex("\.($([string]::Join('|', $executables)))`$", $regexOptions)
+                        $compressedRegex = New-Object regex("\.($([string]::Join('|', $compresseds)))`$", $regexOptions)
+                        $textRegex = New-Object regex("\.($([string]::Join('|', $texts)))`$", $regexOptions)
 
-                    if ($_ -is [System.IO.DirectoryInfo])
-                    {
-                      [Console]::ForegroundColor = $directoryColor 
-                      $name = "$name/"
-                    }
-                    elseif ($compressedRegex.IsMatch($_.Name))
-                    {
-                      [Console]::ForegroundColor = $compressedColor
-                    }
-                    elseif ($executableRegex.IsMatch($_.Name))
-                    {
-                      [Console]::ForegroundColor = $executableColor
-                      $name = "$name*"
-                    }
-                    elseif ($textRegex.IsMatch($_.Name))
-                    {
-                        [Console]::ForegroundColor = $textColor
-                    }
-                    else
-                    {
-                        [Console]::ForegroundColor = $defaultColor
-                    }
+                        $directoryColor = "$([char](27))[34;1m"
+                        $executableColor = "$([char](27))[32;1m"
+                        $compressedColor = "$([char](27))[31;1m"
+                        $textColor = "$([char](27))[33;1m"
+                        $resetColor = "$([char](27))[0m"
 
-                  }
+                        if ($_ -is [System.IO.DirectoryInfo]) {
+                            $name = "$directoryColor$name/$resetColor"
+                        }
+                        elseif ($compressedRegex.IsMatch($_.Name)) {
+                            $name = "$compressedColor$name$resetColor"
+                        }
+                        elseif ($executableRegex.IsMatch($_.Name)) {
+                            $name = "$executableColor$name*$resetColor"
+                        }
+                        elseif ($textRegex.IsMatch($_.Name)) {
+                            $name = "$textColor$name$resetColor"
+                        }
+                     }
+
 
                   $name
                 </ScriptBlock>
