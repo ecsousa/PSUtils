@@ -33,10 +33,21 @@ function Write-Prompt {
         $branch = (git branch 2>$null) | %{ ([regex] '\* (.*)').match($_) } | ? { $_.Success } | %{ $_.Groups[1].Value } | Select-Object -First 1
     }
 
-    $title = $executionContext.SessionState.Path.CurrentLocation
+    $drive = (Get-Location).Drive
 
-    if($branch) {
-        $title = "[$branch] $title";
+    if($drive.Root -eq "$($drive.Name):\") {
+        $title = $executionContext.SessionState.Path.CurrentLocation
+
+        if($branch) {
+            $title = "[$branch] $title";
+        }
+    }
+    else {
+        $title = $drive.Name
+
+        if($branch) {
+            $title = "$title@$branch";
+        }
     }
 
     $host.UI.RawUI.WindowTitle = $title
