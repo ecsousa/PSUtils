@@ -18,11 +18,15 @@ function Start-Vim {
     Write-Verbose "Start Vim from '$(@($paths)[0])'"
 
     $newArgs = & {
-        '-u';
-        cvpa (Join-Path $PSScriptRoot vim\vimrc);
+        $vimrc = (Join-Path $PSScriptRoot vim\vimrc);
+
+        if(Test-Path $vimrc) {
+            '-u';
+            $vimrc;
+        }
+
         Expand-Arguments $args | Resolve-PSDrive;
     } $args;
-
 
     $currentPos = [Console]::CursorTop
     & @($paths)[0] $newArgs

@@ -18,11 +18,15 @@ function Start-gVim {
     Write-Verbose "Start gVim from '$(@($paths)[0])'"
 
     $newArgs = & {
-        '-u';
-        (Join-Path $PSScriptRoot vim\vimrc);
+        $vimrc = (Join-Path $PSScriptRoot vim\vimrc);
+
+        if(Test-Path $vimrc) {
+            '-u';
+            $vimrc;
+        }
+
         Expand-Arguments $args | Resolve-PSDrive;
     } $args;
-
 
     & @($paths)[0] $newArgs
 }
