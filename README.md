@@ -1,56 +1,23 @@
 # PSUtils
 
-PSUtils is a PowerShell module containing several utility scripts.
+**PSUtils has been discontinued!!**
 
-Please refer to [PSUtils Wiki](https://github.com/ecsousa/PSUtils/wiki)
-to learn more about its functions.
+It was a huge PowerShell, containing lots of unrelated scripts.  To keep thing
+more organized and maintainable, it has been splitted into small modules, each
+one containing related scripts:
 
-_(PS: you will probably need to execute PowerShell with `-ExecutionPolicy RemoteSigned`
-command line option)_
+* **[PSClip](https://github.com/ecsousa/PSClip)**: Clipboard manipulation
+  functions
+* **[PSColors](https://github.com/ecsousa/PSColors)**: Scripts for coloring
+  prompt and file listings.
+* **[PSCustomDrives](https://github.com/ecsousa/PSCustomDrives)**: Modules to
+  help creating persistent PSDrives
+* **[PSGnuwin32](https://github.com/ecsousa/PSGnuwin32)**: Collection of
+  aliased gnuwin32 tools
+* **[PSSudo](https://github.com/ecsousa/PSSudo)**: Function for executing
+  programs with administrative privileges
+* **[PSVSEnv](https://github.com/ecsousa/PSVSEnv)**: Functions for loading
+  Visual Studio environment variables
 
-## Import Module
-
-To import PSUtils module, you just have to execute the following
-command in PowerShell:
-
-    Import-Module <Path to PSUtils folder>
-
-(as you would with any other PowerShell script module)
-
-Alternatively, if the PSUtils parent folder is listed
-in PSModulePath environment variable, you can just execute:
-
-    Import-Module PSUtils
-
-If PSUtils is already imported, and you went to reload it after and
-update, you will have to execute:
-
-    Import-Module PSUtils -Force
-
-## ConEmu
-
-PSUtil works greatly with [ConEmu](https://code.google.com/p/conemu-maximus5/)!
-It have a script to install its lastest version. If you execute the
-following PSUtils command:
-
-    Install-ConEmu
-
-it will install ConEmu at PSUtils parent folder, and configure it to open
-Powershell in startup with PSUtils module imported.
-
-*PS: This will require PowerShell 3.0*
-
-## PSUtils Launcher
-
-If you want an easy way to download PSUtils module, and integrate it with ConEmu, you can just jump
-to [PSUtils Launcher](https://github.com/ecsousa/PSUtilsLauncher/releases/latest). It's a small
-executable (requieres .NET 4.0), which will download PSUtils repository and ConEmu (if not present - ConEmu
-download will requiere PowerShell 3.0).
-
-Also, it will keep PSUtils up to date.
-
-It does not requiere native Git client installed.
- 
----
-
-Hope you'll all enjoy it!
+These modules are also published to PowerShellGallery and PsGet repositories,
+for easy installing in Windows 10, and for older versions with PsGet installed.
